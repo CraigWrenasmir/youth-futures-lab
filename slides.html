@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Youth Futures Lab — Day Deck</title>
+<style>
+  :root{
+    --ink:#16120D;
+    --ink2:#221C15;
+    --paper:#FAF5EC;
+    --paper-dim:#C9BFAE;
+    --red:#E62B1E;
+    --smart:#2BB3BF;
+    --kind:#FF7A45;
+    --gold:#E3B34A;
+    --display:'Avenir Next Condensed','Futura-CondensedMedium','Arial Narrow','Helvetica Neue',Arial,sans-serif;
+    --body:'Charter','Georgia','Iowan Old Style',serif;
+    --ui:'Avenir Next','Avenir','Seravek','Helvetica Neue',Arial,sans-serif;
+    --mono:'SF Mono','Menlo','Consolas',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--ink);color:var(--paper);font-family:var(--body);line-height:1.45;}
+  .deck{height:100dvh;overflow-y:auto;scroll-snap-type:y mandatory;}
+  .slide{
+    min-height:100dvh;scroll-snap-align:start;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:8vh 7vw;position:relative;overflow:hidden;
+  }
+  .slide:nth-child(even){background:var(--ink2);}
+  .slide::before{
+    content:attr(data-n);position:absolute;top:22px;right:26px;
+    font-family:var(--display);font-weight:700;font-size:14px;color:var(--paper-dim);letter-spacing:.1em;
+  }
+  .tag{
+    font-family:var(--ui);font-size:clamp(11px,1.3vw,15px);letter-spacing:.24em;text-transform:uppercase;
+    color:var(--gold);font-weight:700;margin-bottom:2vh;
+  }
+  h1{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(44px,9vw,120px);line-height:.92;}
+  h2{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(32px,6vw,80px);line-height:.95;margin-bottom:2.5vh;}
+  .smart{color:var(--smart);} .kind{color:var(--kind);} .redx{color:var(--red);} .gold{color:var(--gold);}
+  p.big{font-size:clamp(16px,2.2vw,26px);max-width:36em;}
+  p.big + p.big{margin-top:1.4vh;}
+  .dim{color:var(--paper-dim);}
+  em{color:var(--gold);}
+
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:2.5vw;margin-top:3.5vh;max-width:950px;}
+  @media(max-width:640px){.duo{grid-template-columns:1fr;}}
+  .duo > div{border-radius:14px;padding:2.5vh 2.2vw;}
+  .duo .s{background:rgba(43,179,191,.12);border:2px solid var(--smart);}
+  .duo .k{background:rgba(255,122,69,.12);border:2px solid var(--kind);}
+  .duo b{font-family:var(--display);text-transform:uppercase;font-size:clamp(24px,3.6vw,44px);display:block;line-height:1;margin-bottom:.8vh;}
+  .duo .s b{color:var(--smart);} .duo .k b{color:var(--kind);}
+  .duo p{font-size:clamp(14px,1.8vw,20px);}
+
+  .biglist{margin-top:3vh;display:grid;gap:1.6vh;max-width:900px;}
+  .biglist div{
+    font-size:clamp(17px,2.4vw,28px);padding-left:1.3em;position:relative;
+  }
+  .biglist div::before{content:'—';position:absolute;left:0;color:var(--red);}
+  .biglist div:nth-child(4n+2)::before{color:var(--smart);}
+  .biglist div:nth-child(4n+3)::before{color:var(--kind);}
+  .biglist div:nth-child(4n)::before{color:var(--gold);}
+  .biglist b{color:var(--gold);font-family:var(--body);}
+
+  .fa-wall{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2vh 1vw;margin-top:3vh;max-width:1100px;}
+  .fa-wall div{
+    border:2px solid var(--paper-dim);border-radius:12px;padding:1.4vh 1.4vw;
+  }
+  .fa-wall div:nth-child(5n+1){border-color:var(--smart);}
+  .fa-wall div:nth-child(5n+2){border-color:var(--kind);}
+  .fa-wall div:nth-child(5n+3){border-color:var(--gold);}
+  .fa-wall div:nth-child(5n+4){border-color:var(--red);}
+  .fa-wall b{font-family:var(--display);text-transform:uppercase;font-size:clamp(17px,1.9vw,24px);display:block;line-height:1.05;}
+  .fa-wall span{font-size:clamp(12px,1.3vw,15px);color:var(--paper-dim);font-style:italic;line-height:1.3;display:block;margin-top:.3vh;}
+
+  .pitchlines{margin-top:3vh;display:grid;gap:1.8vh;max-width:850px;}
+  .pl{display:grid;grid-template-columns:minmax(160px,300px) 1fr;gap:2vw;align-items:baseline;}
+  @media(max-width:560px){.pl{grid-template-columns:1fr;gap:2px;}}
+  .pl b{font-family:var(--display);text-transform:uppercase;font-size:clamp(24px,3.8vw,48px);line-height:1;}
+  .pl:nth-child(1) b{color:var(--red);}
+  .pl:nth-child(2) b{color:var(--smart);}
+  .pl:nth-child(3) b{color:var(--kind);}
+  .pl:nth-child(4) b{color:var(--smart);font-size:clamp(19px,2.6vw,32px);}
+  .pl:nth-child(5) b{color:var(--kind);font-size:clamp(19px,2.6vw,32px);}
+  .pl span{font-size:clamp(15px,1.9vw,22px);color:var(--paper-dim);}
+
+  .checks{display:grid;grid-template-columns:1fr 1fr;gap:1.4vh 3vw;margin-top:3vh;max-width:1000px;counter-reset:chk;}
+  @media(max-width:640px){.checks{grid-template-columns:1fr;}}
+  .checks div{
+    counter-increment:chk;font-size:clamp(16px,2.1vw,25px);padding-left:2.1em;position:relative;
+  }
+  .checks div::before{
+    content:counter(chk);position:absolute;left:0;top:.05em;
+    font-family:var(--display);font-weight:700;color:#fff;background:var(--red);
+    width:1.5em;height:1.5em;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+    font-size:.75em;
+  }
+  .checks div:nth-child(5)::before{background:var(--smart);}
+  .checks div:nth-child(6)::before{background:var(--kind);}
+
+  .makes{display:flex;flex-wrap:wrap;gap:1.2vh 1vw;margin-top:3vh;max-width:950px;}
+  .makes span{
+    font-family:var(--display);text-transform:uppercase;font-size:clamp(15px,2vw,24px);
+    border:2px solid var(--paper-dim);border-radius:999px;padding:.4vh 1.5vw;
+  }
+  .makes span:nth-child(3n+1){border-color:var(--smart);color:var(--smart);}
+  .makes span:nth-child(3n+2){border-color:var(--kind);color:var(--kind);}
+  .makes span:nth-child(3n){border-color:var(--gold);color:var(--gold);}
+
+  .awards{display:flex;flex-wrap:wrap;gap:1.4vh 1vw;margin-top:3.5vh;max-width:950px;}
+  .awards span{
+    font-family:var(--display);text-transform:uppercase;font-size:clamp(17px,2.3vw,28px);
+    background:var(--paper);color:var(--ink);border-radius:999px;padding:.7vh 1.8vw;
+  }
+  .awards span:nth-child(3n+1){background:var(--red);color:#fff;}
+  .awards span:nth-child(3n){background:transparent;border:2px solid var(--gold);color:var(--gold);}
+
+  .schedule{margin-top:3vh;max-width:760px;display:grid;gap:.9vh;}
+  .schedule div{display:grid;grid-template-columns:130px 1fr;gap:2vw;font-size:clamp(15px,2vw,23px);align-items:baseline;}
+  .schedule b{font-family:var(--display);color:var(--red);font-size:clamp(17px,2.2vw,26px);}
+  .schedule .now b{color:var(--gold);}
+
+  /* ---------- TIMER ---------- */
+  .timer{
+    margin-top:4vh;display:inline-flex;align-items:center;gap:2vw;flex-wrap:wrap;
+    background:rgba(250,245,236,.05);border:2px solid var(--paper-dim);border-radius:16px;
+    padding:2vh 2.5vw;
+  }
+  .timer .digits{
+    font-family:var(--mono);font-weight:700;font-size:clamp(48px,8vw,110px);line-height:1;
+    letter-spacing:.02em;font-variant-numeric:tabular-nums;
+  }
+  .timer.warn{border-color:var(--gold);}
+  .timer.warn .digits{color:var(--gold);}
+  .timer.zero{border-color:var(--red);animation:flash 1s steps(2) infinite;}
+  .timer.zero .digits{color:var(--red);}
+  @keyframes flash{50%{background:rgba(230,43,30,.18);}}
+  .timer .tbtns{display:flex;gap:10px;}
+  .timer button{
+    font-family:var(--ui);font-weight:700;font-size:clamp(13px,1.4vw,16px);letter-spacing:.08em;text-transform:uppercase;
+    background:var(--paper);color:var(--ink);border:none;border-radius:8px;padding:12px 20px;cursor:pointer;
+  }
+  .timer button:hover{background:var(--red);color:#fff;}
+  .timer .tlabel{
+    font-family:var(--ui);font-size:clamp(11px,1.2vw,13px);letter-spacing:.2em;text-transform:uppercase;
+    color:var(--paper-dim);width:100%;order:-1;font-weight:700;
+  }
+
+  /* fixed chrome */
+  .clock{
+    position:fixed;top:20px;left:24px;z-index:10;
+    font-family:var(--mono);font-size:17px;color:var(--paper-dim);
+    background:rgba(22,18,13,.7);padding:6px 12px;border-radius:8px;
+  }
+  .navbtns{position:fixed;bottom:20px;right:20px;display:flex;gap:8px;z-index:10;}
+  .navbtns button{
+    font-family:var(--display);font-weight:700;font-size:22px;width:52px;height:52px;border-radius:50%;
+    border:2px solid var(--paper-dim);background:rgba(22,18,13,.8);color:var(--paper);cursor:pointer;
+  }
+  .navbtns button:hover{border-color:var(--red);color:var(--red);}
+  @keyframes rise{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+  .slide > *{animation:rise .6s ease both;}
+  .slide > *:nth-child(2){animation-delay:.08s;}
+  .slide > *:nth-child(3){animation-delay:.16s;}
+  .slide > *:nth-child(4){animation-delay:.24s;}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <!-- 1 · ARRIVAL HOLDING SLIDE -->
+  <section class="slide" data-n="1 / 20">
+    <div class="tag">TEDxNewy · Youth Futures Lab · Friday 7 August 2026</div>
+    <h1><span class="smart">Smart</span> <span class="redx">+</span> <span class="kind">Kind</span><br>Newcastle</h1>
+    <p class="big" style="margin-top:3vh;">Welcome — find your table, meet your team.<br><span class="dim">We begin at 10:00.</span></p>
+  </section>
+
+  <!-- 2 · WELCOME -->
+  <section class="slide" data-n="2 / 20">
+    <div class="tag">10:00 · Welcome</div>
+    <h2>Ideas worth<br><span class="redx">sharing</span></h2>
+    <p class="big">This is a TEDx event, and TEDx is built on a simple belief: a good idea, clearly told, can change how people see things.</p>
+    <p class="big">Today we're pointing that belief at the city you live in.</p>
+  </section>
+
+  <!-- 3 · THE BRIEF -->
+  <section class="slide" data-n="3 / 20">
+    <div class="tag">The challenge brief</div>
+    <h2>You are <span class="redx">consultants</span><br>to the council</h2>
+    <p class="big">Your job today: choose one part of city life and design a new idea, improvement, service, space, campaign, or invention that would make Newcastle both <b class="smart">smarter</b> and <b class="kind">kinder</b> for young people.</p>
+    <p class="big dim">The future isn't only something adults build for young people. It's something young people should help imagine, shape, challenge, and explain.</p>
+  </section>
+
+  <!-- 4 · SMART + KIND -->
+  <section class="slide" data-n="4 / 20">
+    <div class="tag">The two words that matter</div>
+    <h2><span class="smart">Smart</span> is not enough.<br><span class="kind">Kind</span> is not enough.</h2>
+    <div class="duo">
+      <div class="s"><b>Smart</b><p>Good systems, transport, information, design, decisions. A city that works well.</p></div>
+      <div class="k"><b>Kind</b><p>Safe, welcoming, creative, inclusive, affordable, accessible, human. A city that cares about people.</p></div>
+    </div>
+    <p class="big" style="margin-top:3vh;">A smart city is not just a city with better technology. A smart city should also be kinder, fairer, safer, more creative, and more human.</p>
+  </section>
+
+  <!-- 5 · THE DAY -->
+  <section class="slide" data-n="5 / 20">
+    <div class="tag">The shape of the day</div>
+    <h2>Here's the plan</h2>
+    <div class="schedule">
+      <div><b>10:15</b><span>Workshop 1 — See the City Differently</span></div>
+      <div><b>11:00</b><span>Break</span></div>
+      <div><b>11:15</b><span>Workshop 2 — Build the Future Proposal</span></div>
+      <div><b>12:15</b><span>Lunch — your ideas stay on the tables</span></div>
+      <div><b>1:00</b><span>Rehearsal + pitch coaching</span></div>
+      <div><b>1:30</b><span>Final pitches — 2 minutes per team</span></div>
+      <div><b>2:20</b><span>Reflection + recognitions</span></div>
+    </div>
+  </section>
+
+  <!-- 6 · WS1 TITLE -->
+  <section class="slide" data-n="6 / 20">
+    <div class="tag">Workshop 1 · 10:15 – 11:00</div>
+    <h2>See the city<br><span class="redx">differently</span></h2>
+    <p class="big">Choose a focus area. Find a real problem. Start shaping an idea.</p>
+  </section>
+
+  <!-- 7 · FOCUS AREAS -->
+  <section class="slide" data-n="7 / 20">
+    <div class="tag">First: choose your focus area</div>
+    <h2>Pick what actually<br>affects <span class="gold">you</span></h2>
+    <div class="fa-wall">
+      <div><b>Getting Around</b><span>moving freely, safely, cheaply, independently</span></div>
+      <div><b>Places to Hang Out</b><span>time without buying something or being moved on</span></div>
+      <div><b>Digital Life</b><span>tech that connects, not controls</span></div>
+      <div><b>Safe, Not Watched</b><span>feeling safe without feeling surveilled</span></div>
+      <div><b>The Cost of Being Young</b><span>what if being a teenager cost less?</span></div>
+      <div><b>Learning Beyond School</b><span>places to study, make, experiment</span></div>
+      <div><b>Mental Health &amp; Quiet</b><span>where to go when it's all too much</span></div>
+      <div><b>Food &amp; Social Life</b><span>affordable, welcoming places to eat &amp; meet</span></div>
+      <div><b>Creative Expression</b><span>making &amp; sharing art, music, games, film</span></div>
+      <div><b>Future You: Newcastle at 25</b><span>would you stay? what would need to change?</span></div>
+    </div>
+    <div class="timer" data-min="8"><span class="tlabel">Choose your area</span><span class="digits">08:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
+  </section>
+
+  <!-- 8 · PROBLEM DISCOVERY -->
+  <section class="slide" data-n="8 / 20">
+    <div class="tag">Problem discovery</div>
+    <h2>What's really<br>going on?</h2>
+    <div class="biglist">
+      <div>What is the current problem?</div>
+      <div>Who does it affect?</div>
+      <div>Where does it happen?</div>
+      <div>What makes it frustrating, unfair, unsafe, boring, expensive, inaccessible, or overlooked?</div>
+      <div><b>What do adults misunderstand about this issue?</b></div>
+    </div>
+    <div class="timer" data-min="15"><span class="tlabel">Problem discovery</span><span class="digits">15:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
+  </section>
+
+  <!-- 9 · IDEA GENERATION -->
+  <section class="slide" data-n="9 / 20">
+    <div class="tag">Idea generation</div>
+    <h2>Many ideas first.<br>Then choose <span class="redx">one</span>.</h2>
+    <div class="makes">
+      <span>a place</span><span>a service</span><span>an app</span><span>a campaign</span><span>an event</span><span>a new rule</span><span>a map</span><span>a transport fix</span><span>a public artwork</span><span>a physical object</span><span>a new kind of youth space</span>
+    </div>
+    <div class="timer" data-min="15"><span class="tlabel">Idea generation</span><span class="digits">15:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
+  </section>
+
+  <!-- 10 · PITCH LESSON -->
+  <section class="slide" data-n="10 / 20">
+    <div class="tag">Mini pitch lesson — how you'll tell it</div>
+    <h2>Your whole pitch,<br>in three lines</h2>
+    <div class="pitchlines">
+      <div class="pl"><b>Right now…</b><span>what is the problem?</span></div>
+      <div class="pl"><b>But what if…</b><span>what is your idea?</span></div>
+      <div class="pl"><b>Imagine if…</b><span>what changes because of your idea?</span></div>
+    </div>
+  </section>
+
+  <!-- 11 · BREAK -->
+  <section class="slide" data-n="11 / 20">
+    <div class="tag">11:00</div>
+    <h2>Break</h2>
+    <p class="big dim">Back at 11:15 — then we build.</p>
+    <div class="timer" data-min="15"><span class="tlabel">Break</span><span class="digits">15:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
+  </section>
+
+  <!-- 12 · WS2 TITLE -->
+  <section class="slide" data-n="12 / 20">
+    <div class="tag">Workshop 2 · 11:15 – 12:15</div>
+    <h2>Build the future<br><span class="redx">proposal</span></h2>
+    <p class="big">Make your idea visible. Create at least one of:</p>
+    <div class="makes">
+      <span>concept poster</span><span>map</span><span>labelled sketch</span><span>service plan</span><span>app mock-up</span><span>advertisement</span><span>slogan</span><span>prototype model</span><span>before / after plan</span><span>storyboard</span><span>council proposal</span>
+    </div>
+    <div class="timer" data-min="60"><span class="tlabel">Build time</span><span class="digits">60:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
+  </section>
+
+  <!-- 13 · IDEA CHECKS -->
+  <section class="slide" data-n="13 / 20">
+    <div class="tag">Keep checking your idea against these</div>
+    <h2>The eight<br>idea checks</h2>
+    <div class="checks">
+      <div>What is the problem?</div>
+      <div>What is your solution?</div>
+      <div>Who is it for?</div>
+      <div>Where would it happen?</div>
+      <div>How is it <b class="smart">smart</b>?</div>
+      <div>How is it <b class="kind">kind</b>?</div>
+      <div>What would the council need to do?</div>
+      <div>What would success look like?</div>
+    </div>
+  </section>
+
+  <!-- 14 · REMIX -->
+  <section class="slide" data-n="14 / 20">
+    <div class="tag">~11:45 · The remix moment</div>
+    <h2>Steal one idea<br><span class="gold">kindly</span></h2>
+    <p class="big">Send one or two people from your team to visit another table. Find one idea you like, bring it back, and use it to improve your own proposal.</p>
+    <div class="timer" data-min="5"><span class="tlabel">Remix</span><span class="digits">05:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
+  </section>
+
+  <!-- 15 · LUNCH -->
+  <section class="slide" data-n="15 / 20">
+    <div class="tag">12:15 · Lunch</div>
+    <h2>Lunch +<br>mini-expo</h2>
+    <p class="big">Leave your posters and materials on the tables — wander around and see what every other team is imagining.</p>
+    <p class="big dim">Back at 1:00 for rehearsal.</p>
+    <div class="timer" data-min="45"><span class="tlabel">Lunch</span><span class="digits">45:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
+  </section>
+
+  <!-- 16 · REHEARSAL -->
+  <section class="slide" data-n="16 / 20">
+    <div class="tag">1:00 · Rehearsal + coaching</div>
+    <h2>Practise it<br>out loud</h2>
+    <div class="pitchlines">
+      <div class="pl"><b>Right now…</b><span>the problem</span></div>
+      <div class="pl"><b>But what if…</b><span>your idea</span></div>
+      <div class="pl"><b>Imagine if…</b><span>the future it creates</span></div>
+      <div class="pl"><b>Smarter because…</b><span>the system benefit</span></div>
+      <div class="pl"><b>Kinder because…</b><span>the human benefit</span></div>
+    </div>
+    <div class="biglist" style="margin-top:3vh;">
+      <div>Start with the problem, not the product</div>
+      <div>One clear idea · simple language · share the talking</div>
+      <div>Use a real example: <em>"Imagine you're 15 and…"</em></div>
+      <div>Finish with a strong sentence</div>
+    </div>
+    <div class="timer" data-min="30"><span class="tlabel">Rehearsal</span><span class="digits">30:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
+  </section>
+
+  <!-- 17 · SHOWTIME -->
+  <section class="slide" data-n="17 / 20">
+    <div class="tag">1:30 · Final pitches</div>
+    <h2>Over to <span class="redx">you</span></h2>
+    <p class="big dim">Two minutes per team. Panel — you're listening for ideas that are practical, ideas that show us something adults miss, and ideas worth taking further.</p>
+    <div class="timer" data-min="2"><span class="tlabel">Pitch timer — reset between teams</span><span class="digits">02:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
+  </section>
+
+  <!-- 18 · REFLECTION -->
+  <section class="slide" data-n="18 / 20">
+    <div class="tag">2:20 · Reflection</div>
+    <h2>What did we<br>hear today?</h2>
+    <div class="biglist">
+      <div>What kept coming up, table after table?</div>
+      <div>What did young people notice that adults might miss?</div>
+      <div><b>What changes because these ideas exist?</b></div>
+    </div>
+  </section>
+
+  <!-- 19 · RECOGNITIONS -->
+  <section class="slide" data-n="19 / 20">
+    <div class="tag">Recognitions</div>
+    <h2>No single winner<br>today — <span class="gold">on purpose</span></h2>
+    <div class="awards">
+      <span>Most Imaginative Future</span>
+      <span>Smartest System Idea</span>
+      <span>Kindest City Idea</span>
+      <span>Strongest Youth Voice</span>
+      <span>Best Pitch</span>
+      <span>Best Visual Concept</span>
+      <span>Most Practical Council Proposal</span>
+      <span>Best "We Hadn't Thought of That" Idea</span>
+    </div>
+  </section>
+
+  <!-- 20 · CLOSE -->
+  <section class="slide" data-n="20 / 20">
+    <div class="tag">Thank you</div>
+    <h2>Keep<br><span class="redx">noticing</span></h2>
+    <p class="big">Young people deserve a city that doesn't just include them in the future, but listens to them now. Today, it did.</p>
+    <p class="big dim">Thank you to every consultant in this room. Get home safely.</p>
+  </section>
+
+</div>
+
+<div class="clock" id="clock">--:--</div>
+<div class="navbtns">
+  <button id="prev" aria-label="Previous slide">↑</button>
+  <button id="next" aria-label="Next slide">↓</button>
+</div>
+
+<script>
+(function(){
+  // ---------- navigation ----------
+  const deck = document.getElementById('deck');
+  const slides = [...document.querySelectorAll('.slide')];
+  let current = 0;
+  function go(i){
+    current = Math.max(0, Math.min(slides.length-1, i));
+    slides[current].scrollIntoView({behavior:'smooth'});
+  }
+  document.getElementById('next').addEventListener('click', ()=>go(current+1));
+  document.getElementById('prev').addEventListener('click', ()=>go(current-1));
+  document.addEventListener('keydown', e=>{
+    if (e.target.tagName === 'BUTTON') return;
+    if (['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)) { e.preventDefault(); go(current+1); }
+    if (['ArrowUp','ArrowLeft','PageUp'].includes(e.key)) { e.preventDefault(); go(current-1); }
+  });
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{ if (en.isIntersecting) current = slides.indexOf(en.target); });
+  }, {root: deck, threshold: .55});
+  slides.forEach(s=>obs.observe(s));
+
+  // ---------- live clock ----------
+  const clock = document.getElementById('clock');
+  setInterval(()=>{
+    const d = new Date();
+    clock.textContent = String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+  }, 1000);
+
+  // ---------- timers ----------
+  function beep(){
+    try{
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      [0,.35,.7].forEach(t=>{
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type='sine'; o.frequency.value=880;
+        g.gain.setValueAtTime(.4, ctx.currentTime+t);
+        g.gain.exponentialRampToValueAtTime(.001, ctx.currentTime+t+.3);
+        o.connect(g); g.connect(ctx.destination);
+        o.start(ctx.currentTime+t); o.stop(ctx.currentTime+t+.3);
+      });
+    }catch(e){}
+  }
+  document.querySelectorAll('.timer').forEach(t=>{
+    const total = parseInt(t.dataset.min,10)*60;
+    let left = total, iv = null;
+    const digits = t.querySelector('.digits');
+    function render(){
+      const m = Math.floor(left/60), s = left%60;
+      digits.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+      t.classList.toggle('warn', left>0 && left<=60);
+      t.classList.toggle('zero', left===0);
+    }
+    function tick(){
+      if (left>0){ left--; render(); if (left===0){ beep(); clearInterval(iv); iv=null; } }
+    }
+    t.querySelectorAll('button').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        const act = b.dataset.act;
+        if (act==='start' && !iv && left>0) iv = setInterval(tick,1000);
+        if (act==='pause' && iv){ clearInterval(iv); iv=null; }
+        if (act==='reset'){ if(iv){clearInterval(iv);iv=null;} left=total; render(); }
+      });
+    });
+    render();
+  });
+})();
+</script>
+</body>
+</html>

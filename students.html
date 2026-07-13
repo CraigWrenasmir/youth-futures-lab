@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Youth Futures Lab — Your Mission</title>
+<style>
+  :root{
+    --ink:#16120D;
+    --ink2:#221C15;
+    --paper:#FAF5EC;
+    --paper-dim:#C9BFAE;
+    --red:#E62B1E;
+    --smart:#2BB3BF;
+    --kind:#FF7A45;
+    --gold:#E3B34A;
+    --display:'Avenir Next Condensed','Futura-CondensedMedium','Arial Narrow','Helvetica Neue',Arial,sans-serif;
+    --body:'Charter','Georgia','Iowan Old Style',serif;
+    --ui:'Avenir Next','Avenir','Seravek','Helvetica Neue',Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);color:var(--paper);font-family:var(--body);line-height:1.5;
+  }
+  .deck{
+    height:100dvh;overflow-y:auto;scroll-snap-type:y mandatory;
+  }
+  .slide{
+    min-height:100dvh;scroll-snap-align:start;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:7vh 7vw;position:relative;overflow:hidden;
+  }
+  .slide:nth-child(even){background:var(--ink2);}
+  .slide::before{
+    content:attr(data-n);position:absolute;top:24px;right:28px;
+    font-family:var(--display);font-weight:700;font-size:15px;color:var(--paper-dim);
+    letter-spacing:.1em;
+  }
+
+  .tag{
+    font-family:var(--ui);font-size:clamp(11px,1.3vw,14px);letter-spacing:.24em;text-transform:uppercase;
+    color:var(--gold);font-weight:700;margin-bottom:2vh;
+  }
+  h1{
+    font-family:var(--display);font-weight:700;text-transform:uppercase;
+    font-size:clamp(44px,9vw,120px);line-height:.92;letter-spacing:.005em;
+  }
+  h2{
+    font-family:var(--display);font-weight:700;text-transform:uppercase;
+    font-size:clamp(34px,6.5vw,84px);line-height:.95;margin-bottom:3vh;
+  }
+  .smart{color:var(--smart);}
+  .kind{color:var(--kind);}
+  .redx{color:var(--red);}
+  .gold{color:var(--gold);}
+  p.big{
+    font-size:clamp(17px,2.4vw,27px);max-width:34em;color:var(--paper);
+  }
+  p.big + p.big{margin-top:1.6vh;}
+  .dim{color:var(--paper-dim);}
+  em{color:var(--gold);font-style:italic;}
+
+  .talk{
+    margin-top:4vh;display:inline-flex;align-items:baseline;gap:12px;
+    border:1.5px dashed var(--gold);border-radius:10px;padding:12px 20px;
+    font-family:var(--ui);font-size:clamp(13px,1.7vw,17px);color:var(--gold);
+    max-width:34em;
+  }
+  .talk b{font-size:clamp(10px,1.2vw,12px);letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;}
+
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:2.5vw;margin-top:4vh;max-width:900px;}
+  @media(max-width:640px){.duo{grid-template-columns:1fr;}}
+  .duo div{border-radius:14px;padding:3vh 2.5vw;}
+  .duo .s{background:rgba(43,179,191,.12);border:2px solid var(--smart);}
+  .duo .k{background:rgba(255,122,69,.12);border:2px solid var(--kind);}
+  .duo b{
+    font-family:var(--display);text-transform:uppercase;font-size:clamp(26px,4vw,48px);
+    display:block;line-height:1;margin-bottom:1vh;
+  }
+  .duo .s b{color:var(--smart);}
+  .duo .k b{color:var(--kind);}
+  .duo p{font-size:clamp(15px,1.9vw,21px);color:var(--paper);}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2vw;margin-top:4vh;max-width:1000px;}
+  @media(max-width:700px){.steps{grid-template-columns:1fr;}}
+  .steps div{border-top:4px solid var(--red);padding-top:1.5vh;}
+  .steps div:nth-child(2){border-color:var(--smart);}
+  .steps div:nth-child(3){border-color:var(--kind);}
+  .steps b{
+    font-family:var(--display);text-transform:uppercase;font-size:clamp(22px,3vw,34px);
+    display:block;line-height:1.05;margin-bottom:.8vh;
+  }
+  .steps p{font-size:clamp(14px,1.8vw,19px);color:var(--paper-dim);}
+
+  .qgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.4vh 2.5vw;margin-top:3.5vh;max-width:1000px;}
+  @media(max-width:640px){.qgrid{grid-template-columns:1fr;}}
+  .q{
+    font-size:clamp(16px,2.1vw,24px);font-style:italic;
+    padding-left:1.2em;position:relative;
+  }
+  .q::before{content:'—';position:absolute;left:0;color:var(--red);font-style:normal;}
+  .q:nth-child(4n+2)::before{color:var(--smart);}
+  .q:nth-child(4n+3)::before{color:var(--kind);}
+  .q:nth-child(4n)::before{color:var(--gold);}
+
+  .pitchlines{margin-top:4vh;display:grid;gap:2vh;max-width:800px;}
+  .pl{display:grid;grid-template-columns:minmax(150px,220px) 1fr;gap:2vw;align-items:baseline;}
+  @media(max-width:560px){.pl{grid-template-columns:1fr;gap:2px;}}
+  .pl b{
+    font-family:var(--display);text-transform:uppercase;font-size:clamp(24px,3.6vw,44px);line-height:1;
+  }
+  .pl:nth-child(1) b{color:var(--red);}
+  .pl:nth-child(2) b{color:var(--smart);}
+  .pl:nth-child(3) b{color:var(--kind);}
+  .pl span{font-size:clamp(15px,2vw,22px);color:var(--paper-dim);}
+
+  .makes{display:flex;flex-wrap:wrap;gap:1.2vh 1vw;margin-top:3.5vh;max-width:900px;}
+  .makes span{
+    font-family:var(--display);text-transform:uppercase;font-size:clamp(16px,2.2vw,26px);
+    border:2px solid var(--paper-dim);border-radius:999px;padding:.4vh 1.6vw;letter-spacing:.03em;
+  }
+  .makes span:nth-child(3n+1){border-color:var(--smart);color:var(--smart);}
+  .makes span:nth-child(3n+2){border-color:var(--kind);color:var(--kind);}
+  .makes span:nth-child(3n){border-color:var(--gold);color:var(--gold);}
+
+  .facts-final{display:flex;flex-wrap:wrap;gap:1.5vh 1.2vw;margin-top:4vh;}
+  .facts-final span{
+    font-family:var(--ui);font-weight:700;font-size:clamp(13px,1.7vw,18px);
+    background:var(--paper);color:var(--ink);border-radius:999px;padding:1vh 1.8vw;
+  }
+  .facts-final span.r{background:var(--red);color:#fff;}
+
+  /* nav */
+  .navbtns{
+    position:fixed;bottom:20px;right:20px;display:flex;gap:8px;z-index:10;
+  }
+  .navbtns button{
+    font-family:var(--display);font-weight:700;font-size:22px;
+    width:52px;height:52px;border-radius:50%;border:2px solid var(--paper-dim);
+    background:rgba(22,18,13,.8);color:var(--paper);cursor:pointer;transition:all .15s;
+  }
+  .navbtns button:hover{border-color:var(--red);color:var(--red);}
+  .dots{
+    position:fixed;left:16px;top:50%;transform:translateY(-50%);z-index:10;
+    display:flex;flex-direction:column;gap:9px;
+  }
+  .dots a{width:9px;height:9px;border-radius:50%;background:var(--paper-dim);opacity:.4;transition:all .2s;}
+  .dots a.on{opacity:1;background:var(--red);transform:scale(1.4);}
+  @media(max-width:640px){.dots{display:none;}}
+  .hint{
+    position:fixed;bottom:26px;left:50%;transform:translateX(-50%);
+    font-family:var(--ui);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--paper-dim);opacity:.7;z-index:5;transition:opacity .5s;
+  }
+
+  @keyframes rise{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+  .slide > *{animation:rise .6s ease both;}
+  .slide > *:nth-child(2){animation-delay:.08s;}
+  .slide > *:nth-child(3){animation-delay:.16s;}
+  .slide > *:nth-child(4){animation-delay:.24s;}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- 1 · TITLE -->
+  <section class="slide" id="s1" data-n="1 / 9">
+    <div class="tag">TEDxNewy · Youth Futures Lab · Friday 7 August 2026</div>
+    <h1><span class="smart">Smart</span> <span class="redx">+</span> <span class="kind">Kind</span><br>Newcastle</h1>
+    <p class="big" style="margin-top:3vh;">You've been invited to spend a day redesigning your city.<br><span class="dim">Here's what to expect, and how to get ready.</span></p>
+  </section>
+
+  <!-- 2 · THE MISSION -->
+  <section class="slide" id="s2" data-n="2 / 9">
+    <div class="tag">Your mission</div>
+    <h2>You are the<br><span class="redx">consultants</span> now</h2>
+    <p class="big">On the day, your team works as a group of young consultants advising the council. Your job: choose one part of city life, and design an idea that would make Newcastle better <em>for people your age</em>.</p>
+    <p class="big dim">This isn't a school project about "cities" in general. We want what you actually know about this one.</p>
+    <div class="talk"><b>Talk about it</b>If the council genuinely listened to teenagers for one day — what should they hear?</div>
+  </section>
+
+  <!-- 3 · SMART + KIND -->
+  <section class="slide" id="s3" data-n="3 / 9">
+    <div class="tag">The two words that matter</div>
+    <h2>Every idea must be<br><span class="smart">smart</span> <span class="redx">and</span> <span class="kind">kind</span></h2>
+    <div class="duo">
+      <div class="s"><b>Smart</b><p>A city that works well. Transport that turns up. Information you can find. Spaces that are actually designed, not left over.</p></div>
+      <div class="k"><b>Kind</b><p>A city that cares about people. Places you're welcome without spending money. Feeling safe without feeling watched. Room to be yourself.</p></div>
+    </div>
+    <div class="talk"><b>Talk about it</b>Can you think of something in Newcastle that's smart but not kind? Kind but not smart?</div>
+  </section>
+
+  <!-- 4 · THE DAY -->
+  <section class="slide" id="s4" data-n="4 / 9">
+    <div class="tag">How the day works</div>
+    <h2>The day has<br>three parts</h2>
+    <div class="steps">
+      <div><b>Notice &amp; choose</b><p>Morning — pick a focus area (transport, hangout spots, cost, safety, quiet spaces, creativity…), name a real problem, and start shaping an idea.</p></div>
+      <div><b>Design &amp; build</b><p>Midday — turn your idea into something people can see: a poster, a map, an app mock-up, a campaign, a model. Materials provided.</p></div>
+      <div><b>Pitch</b><p>Afternoon — your team gives a 2-minute pitch to the room, including council guests. Coaching first. Nobody is thrown in cold.</p></div>
+    </div>
+  </section>
+
+  <!-- 5 · THE PITCH -->
+  <section class="slide" id="s5" data-n="5 / 9">
+    <div class="tag">How you'll share your idea</div>
+    <h2>The pitch is<br>only three lines</h2>
+    <div class="pitchlines">
+      <div class="pl"><b>Right now…</b><span>what's the problem?</span></div>
+      <div class="pl"><b>But what if…</b><span>what's your idea?</span></div>
+      <div class="pl"><b>Imagine if…</b><span>what changes because of it?</span></div>
+    </div>
+    <p class="big dim" style="margin-top:4vh;">It's two minutes long, the whole team can share the talking, and your poster does a lot of the work for you.</p>
+  </section>
+
+  <!-- 6 · WHAT YOU COULD MAKE -->
+  <section class="slide" id="s6" data-n="6 / 9">
+    <div class="tag">What could your team design?</div>
+    <h2>Anything Newcastle<br>doesn't have <span class="gold">yet</span></h2>
+    <div class="makes">
+      <span>a space</span><span>a service</span><span>an app</span><span>a campaign</span><span>an event</span><span>a map</span><span>a new rule</span><span>a transport fix</span><span>a public artwork</span><span>a quiet zone</span><span>a food hub</span><span>something no one's thought of</span>
+    </div>
+    <p class="big dim" style="margin-top:4vh;">The best ideas don't have to be huge. Sometimes a small change helps people see the whole city differently.</p>
+  </section>
+
+  <!-- 7 · YOUR ONLY HOMEWORK -->
+  <section class="slide" id="s7" data-n="7 / 9">
+    <div class="tag">Your only homework</div>
+    <h2>Start <span class="redx">noticing</span><br>your city</h2>
+    <p class="big">No finished idea needed. No slides. No research assignment. Between now and the day, just pay attention as you move around Newcastle:</p>
+    <div class="qgrid">
+      <div class="q">Where do young people feel welcome — or unwelcome?</div>
+      <div class="q">How easy is it to actually get around?</div>
+      <div class="q">What costs too much?</div>
+      <div class="q">Where do you go to be with friends?</div>
+      <div class="q">Where do you go when you need quiet?</div>
+      <div class="q">Which places feel safe? Which feel uncomfortable?</div>
+      <div class="q">What would make Newcastle better for teenagers?</div>
+      <div class="q">What do adults miss or misunderstand?</div>
+    </div>
+  </section>
+
+  <!-- 8 · THE SECRET WEAPON -->
+  <section class="slide" id="s8" data-n="8 / 9">
+    <div class="tag">Why you, specifically</div>
+    <h2>You know things<br>adults <span class="redx">don't</span></h2>
+    <p class="big">Adults plan this city. But you're the ones getting moved on from places, paying full fares, and looking for somewhere to just <em>exist</em> with your friends.</p>
+    <p class="big">That's exactly what we want in the room. One of the questions your team will answer on the day:</p>
+    <p class="big" style="margin-top:2vh;font-style:italic;color:var(--gold);">"What do adults misunderstand about this issue?"</p>
+    <div class="talk"><b>Talk about it</b>What's one thing about being a teenager in Newcastle that adults get wrong?</div>
+  </section>
+
+  <!-- 9 · SEE YOU THERE -->
+  <section class="slide" id="s9" data-n="9 / 9">
+    <div class="tag">That's it — see you there</div>
+    <h2>Bring <span class="smart">observations</span>,<br>not <span class="kind">answers</span></h2>
+    <div class="facts-final">
+      <span class="r">Friday 7 August 2026</span>
+      <span>9:30 am – 2:30 pm</span>
+      <span>Teams of 5–6</span>
+      <span>All materials provided</span>
+      <span>Recess &amp; lunch as normal</span>
+    </div>
+    <p class="big dim" style="margin-top:4vh;">Young people deserve a city that doesn't just include them in the future — but listens to them now.</p>
+  </section>
+
+</div>
+
+<div class="dots" id="dots"></div>
+<div class="navbtns">
+  <button id="prev" aria-label="Previous slide">↑</button>
+  <button id="next" aria-label="Next slide">↓</button>
+</div>
+<div class="hint" id="hint">Scroll, swipe, or use ↑ ↓ keys</div>
+
+<script>
+(function(){
+  const deck = document.getElementById('deck');
+  const slides = [...document.querySelectorAll('.slide')];
+  const dotsBox = document.getElementById('dots');
+  const hint = document.getElementById('hint');
+  let current = 0;
+
+  slides.forEach((s,i)=>{
+    const a = document.createElement('a');
+    a.href = '#' + s.id;
+    a.addEventListener('click', e => { e.preventDefault(); go(i); });
+    dotsBox.appendChild(a);
+  });
+  const dots = [...dotsBox.children];
+
+  function go(i){
+    current = Math.max(0, Math.min(slides.length-1, i));
+    slides[current].scrollIntoView({behavior:'smooth'});
+  }
+  document.getElementById('next').addEventListener('click', ()=>go(current+1));
+  document.getElementById('prev').addEventListener('click', ()=>go(current-1));
+  document.addEventListener('keydown', e=>{
+    if (['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)) { e.preventDefault(); go(current+1); }
+    if (['ArrowUp','ArrowLeft','PageUp'].includes(e.key)) { e.preventDefault(); go(current-1); }
+  });
+
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if (en.isIntersecting){
+        current = slides.indexOf(en.target);
+        dots.forEach((d,i)=>d.classList.toggle('on', i===current));
+        if (current > 0) hint.style.opacity = 0;
+      }
+    });
+  }, {root: deck, threshold: .55});
+  slides.forEach(s=>obs.observe(s));
+})();
+</script>
+</body>
+</html>

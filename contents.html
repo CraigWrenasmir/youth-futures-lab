@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Youth Futures Lab — All Resources</title>
+<style>
+  :root{
+    --paper:#FAF5EC;
+    --paper-deep:#F2EADA;
+    --ink:#1C1712;
+    --ink-soft:#5C5347;
+    --red:#E62B1E;
+    --smart:#0E7C86;
+    --kind:#E0592A;
+    --gold:#C99A2E;
+    --line:#D9CDB8;
+    --display:'Avenir Next Condensed','Futura-CondensedMedium','Arial Narrow','Helvetica Neue',Arial,sans-serif;
+    --body:'Charter','Georgia','Iowan Old Style',serif;
+    --ui:'Avenir Next','Avenir','Seravek','Helvetica Neue',Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.55;
+    background-image:
+      radial-gradient(circle at 10% 5%, rgba(230,43,30,.05), transparent 38%),
+      radial-gradient(circle at 92% 95%, rgba(14,124,134,.06), transparent 42%);
+  }
+  .page{max-width:900px;margin:0 auto;padding:52px 24px 80px;}
+
+  .kicker{font-family:var(--ui);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:12px;}
+  h1{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(40px,7vw,68px);line-height:.95;}
+  h1 .smart{color:var(--smart);} h1 .kind{color:var(--kind);} h1 .plus{color:var(--red);}
+  .subtitle{font-style:italic;color:var(--ink-soft);font-size:17px;margin:14px 0 8px;max-width:56ch;}
+  .meta{font-family:var(--ui);font-size:13px;color:var(--ink-soft);font-weight:600;}
+  .meta b{color:var(--red);}
+
+  h2{
+    font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:21px;
+    letter-spacing:.04em;margin:42px 0 4px;display:flex;align-items:center;gap:12px;
+  }
+  h2::after{content:'';flex:1;height:1.5px;background:var(--line);}
+  .grpnote{font-family:var(--ui);font-size:13px;color:var(--ink-soft);margin-bottom:14px;}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:640px){.grid{grid-template-columns:1fr;}}
+
+  a.card{
+    display:block;background:#fff;border:1.5px solid var(--ink);border-radius:12px;
+    padding:18px 20px 16px;text-decoration:none;color:var(--ink);position:relative;
+    box-shadow:4px 4px 0 rgba(28,23,18,.12);
+    transition:transform .12s, box-shadow .12s;
+  }
+  a.card:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 rgba(230,43,30,.25);}
+  a.card::after{
+    content:'→';position:absolute;top:14px;right:18px;
+    font-family:var(--display);font-weight:700;font-size:22px;color:var(--red);
+  }
+  .aud{
+    font-family:var(--ui);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    display:inline-block;padding:3px 10px;border-radius:999px;margin-bottom:9px;color:#fff;
+  }
+  .aud.plan{background:var(--red);}
+  .aud.teach{background:var(--smart);}
+  .aud.stud{background:var(--kind);}
+  .aud.day{background:var(--ink);}
+  .aud.print{background:var(--gold);}
+  a.card h3{font-family:var(--display);text-transform:uppercase;font-size:21px;line-height:1.05;margin-bottom:5px;letter-spacing:.02em;}
+  a.card p{font-size:14px;color:var(--ink-soft);margin:0;padding-right:16px;}
+  a.card .file{
+    font-family:var(--ui);font-size:11px;color:var(--gold);font-weight:700;
+    display:block;margin-top:9px;letter-spacing:.04em;
+  }
+
+  .printrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  @media(max-width:640px){.printrow{grid-template-columns:1fr;}}
+  a.mini{
+    display:flex;align-items:baseline;gap:10px;background:#fff;border:1px solid var(--line);
+    border-left:4px solid var(--gold);border-radius:8px;padding:11px 14px;
+    text-decoration:none;color:var(--ink);font-family:var(--ui);font-size:14px;
+    transition:border-color .12s;
+  }
+  a.mini:hover{border-color:var(--red);border-left-color:var(--red);}
+  a.mini b{font-family:var(--display);text-transform:uppercase;font-size:15px;white-space:nowrap;}
+  a.mini span{color:var(--ink-soft);font-size:12.5px;}
+
+  footer{margin-top:52px;padding-top:18px;border-top:1.5px solid var(--line);font-family:var(--ui);font-size:12.5px;color:var(--ink-soft);}
+  footer b{color:var(--red);}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="kicker">TEDxNewy · Youth Futures Lab · Friday 7 August 2026</div>
+  <h1><span class="smart">Smart</span> <span class="plus">+</span> <span class="kind">Kind</span> Newcastle</h1>
+  <p class="subtitle">Everything for the Youth Futures Lab lives on this page. Start with whichever one you need.</p>
+  <p class="meta">Run by <b>Craig &amp; Maggie</b> · high school students as youth consultants to the council · 2-minute TED-style pitches</p>
+
+  <h2>Plan &amp; Organise</h2>
+  <p class="grpnote">For Craig, Maggie and the TEDx crew — the thinking behind the day and the logistics of running it.</p>
+  <div class="grid">
+    <a class="card" href="index.html">
+      <span class="aud plan">Organisers</span>
+      <h3>Planning Hub</h3>
+      <p>The master document: full run sheet, focus areas, workshop flows, facilitation notes, all printables, and the live prep checklist.</p>
+      <span class="file">index.html</span>
+    </a>
+    <a class="card" href="team-guide.html">
+      <span class="aud plan">TEDx team</span>
+      <h3>Team Guide</h3>
+      <p>For Maggie and the crew. Walks through how the day works, who does what, what's already made, what still needs organising, and what to do if something goes sideways.</p>
+      <span class="file">team-guide.html</span>
+    </a>
+  </div>
+
+  <h2>Before the Day</h2>
+  <p class="grpnote">Send these to schools — one for teachers to read, one for teachers to show.</p>
+  <div class="grid">
+    <a class="card" href="teachers.html">
+      <span class="aud teach">Teachers</span>
+      <h3>Teacher Overview</h3>
+      <p>A quick single page for teachers who won't have time to read anything longer: what students will do, the timetable, the small amount of prep, and logistics. Prints to one page.</p>
+      <span class="file">teachers.html</span>
+    </a>
+    <a class="card" href="students.html">
+      <span class="aud stud">Students</span>
+      <h3>Student Prep Slides</h3>
+      <p>Nine big-type slides teachers can step through on the Smartboard or share in Google Classroom. There are a few built-in points to stop and talk.</p>
+      <span class="file">students.html</span>
+    </a>
+  </div>
+
+  <h2>On the Day</h2>
+  <p class="grpnote">What goes on the big screen, and what gets handed out at the end.</p>
+  <div class="grid">
+    <a class="card" href="slides.html">
+      <span class="aud day">Big screen</span>
+      <h3>Day Deck</h3>
+      <p>Twenty slides in run-sheet order: the opening script, every activity, and countdown timers built into the slides (including the 2-minute pitch timer).</p>
+      <span class="file">slides.html</span>
+    </a>
+    <a class="card" href="certificates.html">
+      <span class="aud day">Recognitions</span>
+      <h3>Certificates</h3>
+      <p>All eight recognition categories, one per A4 landscape page, with space for the team name and signatures. One button prints the lot.</p>
+      <span class="file">certificates.html</span>
+    </a>
+  </div>
+
+  <h2>Printables</h2>
+  <p class="grpnote">All in the Planning Hub — these jump straight to each sheet. Each has its own print button.</p>
+  <div class="printrow">
+    <a class="mini" href="index.html#sheet-teacher"><b>Teacher Letter</b><span>formal pre-event guidance</span></a>
+    <a class="mini" href="index.html#sheet-student"><b>Student Handout</b><span>"start noticing your city"</span></a>
+    <a class="mini" href="index.html#sheet-worksheet"><b>Team Worksheet</b><span>the proposal spine, per table</span></a>
+    <a class="mini" href="index.html#sheet-pitch"><b>Pitch Template</b><span>the 5-line scaffold</span></a>
+    <a class="mini" href="index.html#sheet-cards"><b>Focus Area Cards</b><span>all 10, for tables</span></a>
+    <a class="mini" href="index.html#sheet-panel"><b>Panel Listening Card</b><span>for council guests</span></a>
+    <a class="mini" href="index.html#sheet-runcard"><b>Crew Run Card</b><span>timeline + rescue questions</span></a>
+    <a class="mini" href="index.html#sheet-materials"><b>Materials Checklist</b><span>table kits + room setup</span></a>
+  </div>
+
+  <footer>
+    Youth Futures Lab · <b>Smart + Kind Newcastle</b> · TEDxNewy · Friday 7 August 2026 · Craig &amp; Maggie
+  </footer>
+
+</div>
+</body>
+</html>

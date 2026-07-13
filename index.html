@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Youth Futures Lab — Smart + Kind Newcastle</title>
+<style>
+  :root{
+    --paper:#FAF5EC;
+    --paper-deep:#F2EADA;
+    --ink:#1C1712;
+    --ink-soft:#5C5347;
+    --red:#E62B1E;
+    --smart:#0E7C86;
+    --smart-soft:#E0F0F1;
+    --kind:#E0592A;
+    --kind-soft:#FBE8DD;
+    --gold:#C99A2E;
+    --line:#D9CDB8;
+    --display:'Avenir Next Condensed','Futura-CondensedMedium','Arial Narrow','Helvetica Neue',Arial,sans-serif;
+    --body:'Charter','Georgia','Iowan Old Style',serif;
+    --ui:'Avenir Next','Avenir','Seravek','Helvetica Neue',Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;scroll-padding-top:76px;}
+  body{
+    font-family:var(--body);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(230,43,30,.04), transparent 40%),
+      radial-gradient(circle at 88% 90%, rgba(14,124,134,.05), transparent 45%);
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(28,23,18,.96);
+    backdrop-filter:blur(6px);
+    display:flex;align-items:center;gap:2px;
+    padding:0 16px;overflow-x:auto;
+    border-bottom:3px solid var(--red);
+  }
+  nav .brand{
+    font-family:var(--display);font-weight:700;letter-spacing:.06em;
+    color:#fff;font-size:15px;text-transform:uppercase;
+    padding:14px 14px 14px 0;white-space:nowrap;flex-shrink:0;
+  }
+  nav .brand b{color:var(--red);}
+  nav a{
+    font-family:var(--ui);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    color:#CFC5B6;text-decoration:none;padding:16px 10px;white-space:nowrap;
+    border-bottom:3px solid transparent;margin-bottom:-3px;transition:color .15s;
+  }
+  nav a:hover{color:#fff;border-bottom-color:var(--gold);}
+
+  /* ---------- HERO ---------- */
+  header{
+    padding:64px 24px 56px;
+    max-width:1060px;margin:0 auto;
+    position:relative;
+  }
+  .kicker{
+    font-family:var(--ui);font-size:13px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--red);font-weight:600;margin-bottom:14px;
+  }
+  .kicker .x{display:inline-block;transform:rotate(0deg);}
+  h1.hero{
+    font-family:var(--display);font-weight:700;text-transform:uppercase;
+    font-size:clamp(52px,9vw,110px);line-height:.92;letter-spacing:.01em;
+  }
+  h1.hero .smart{color:var(--smart);}
+  h1.hero .kind{color:var(--kind);}
+  h1.hero .plus{color:var(--red);}
+  .hero-sub{
+    margin-top:22px;max-width:620px;font-size:19px;color:var(--ink-soft);
+    font-style:italic;
+  }
+  .hero-chips{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px;}
+  .chip{
+    font-family:var(--ui);font-size:13px;font-weight:600;letter-spacing:.04em;
+    padding:7px 14px;border:1.5px solid var(--ink);border-radius:999px;background:#fff;
+  }
+  .chip.red{background:var(--red);border-color:var(--red);color:#fff;}
+  .hero-brief{
+    margin-top:36px;background:var(--ink);color:#F5EFE3;
+    padding:26px 30px;border-left:8px solid var(--red);
+    font-size:18px;max-width:760px;
+  }
+  .hero-brief strong{color:#fff;}
+  .hero-brief .label{
+    font-family:var(--ui);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold);display:block;margin-bottom:8px;font-weight:600;font-style:normal;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  main{max-width:1060px;margin:0 auto;padding:0 24px 100px;}
+  section{padding:52px 0 8px;border-top:1.5px solid var(--line);margin-top:44px;}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:26px;}
+  .sec-num{
+    font-family:var(--display);font-weight:700;font-size:15px;color:#fff;
+    background:var(--red);width:34px;height:34px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
+    transform:translateY(-2px);
+  }
+  h2{
+    font-family:var(--display);font-weight:700;text-transform:uppercase;
+    font-size:clamp(28px,4vw,40px);letter-spacing:.015em;line-height:1;
+  }
+  h3{
+    font-family:var(--display);font-weight:600;text-transform:uppercase;
+    font-size:20px;letter-spacing:.03em;margin:30px 0 10px;
+  }
+  p{margin-bottom:14px;max-width:74ch;}
+  .lede{font-size:18.5px;}
+  ul.plain{margin:0 0 16px 22px;}
+  ul.plain li{margin-bottom:5px;}
+
+  .pull{
+    font-family:var(--body);font-style:italic;font-size:22px;line-height:1.45;
+    border-left:5px solid var(--gold);padding:6px 0 6px 22px;margin:24px 0;
+    color:var(--ink);max-width:640px;
+  }
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0;}
+  @media(max-width:700px){.duo{grid-template-columns:1fr;}}
+  .duo .card{padding:22px 24px;border-radius:10px;}
+  .duo .card h4{font-family:var(--display);text-transform:uppercase;font-size:22px;margin-bottom:8px;}
+  .card.smart{background:var(--smart-soft);border:1.5px solid var(--smart);}
+  .card.smart h4{color:var(--smart);}
+  .card.kind{background:var(--kind-soft);border:1.5px solid var(--kind);}
+  .card.kind h4{color:var(--kind);}
+  .duo .card p{margin:0;font-size:15.5px;}
+
+  /* ---------- TIMETABLE ---------- */
+  .runsheet{width:100%;border-collapse:collapse;font-family:var(--ui);font-size:15px;background:#fff;border:1.5px solid var(--ink);}
+  .runsheet th{
+    font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;font-size:14px;
+    background:var(--ink);color:#fff;text-align:left;padding:10px 14px;
+  }
+  .runsheet td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:top;}
+  .runsheet td.time{
+    font-family:var(--display);font-weight:700;font-size:17px;color:var(--red);
+    white-space:nowrap;width:92px;
+  }
+  .runsheet td .sess{font-weight:600;}
+  .runsheet tr.milestone td{background:var(--paper-deep);}
+  .runsheet td .why{color:var(--ink-soft);font-size:13.5px;display:block;margin-top:2px;}
+  .table-scroll{overflow-x:auto;margin:20px 0;}
+
+  /* ---------- FOCUS AREAS ---------- */
+  .fa-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:22px;}
+  .fa{
+    background:#fff;border:1.5px solid var(--ink);border-radius:10px;overflow:hidden;
+    box-shadow:4px 4px 0 rgba(28,23,18,.12);
+  }
+  .fa summary{
+    list-style:none;cursor:pointer;padding:18px 20px 16px;position:relative;
+  }
+  .fa summary::-webkit-details-marker{display:none;}
+  .fa summary::after{
+    content:'+';position:absolute;top:14px;right:18px;
+    font-family:var(--display);font-size:24px;color:var(--red);font-weight:700;
+    transition:transform .2s;
+  }
+  .fa[open] summary::after{content:'–';}
+  .fa .fa-num{
+    font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.1em;
+    display:inline-block;padding:2px 9px;border-radius:999px;color:#fff;margin-bottom:8px;
+  }
+  .fa:nth-child(odd) .fa-num{background:var(--smart);}
+  .fa:nth-child(even) .fa-num{background:var(--kind);}
+  .fa h4{font-family:var(--display);text-transform:uppercase;font-size:21px;line-height:1.05;margin-bottom:6px;}
+  .fa .q{font-style:italic;font-size:14.5px;color:var(--ink-soft);line-height:1.45;}
+  .fa .ideas{padding:0 20px 18px;border-top:1px dashed var(--line);}
+  .fa .ideas p{
+    font-family:var(--ui);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold);font-weight:700;margin:12px 0 6px;
+  }
+  .fa .ideas ul{margin-left:20px;font-size:14.5px;}
+  .fa .ideas li{margin-bottom:3px;}
+
+  /* ---------- WORKSHOP FLOW ---------- */
+  .flow{border-left:3px solid var(--red);margin:22px 0 22px 8px;padding-left:0;}
+  .step{position:relative;padding:2px 0 22px 30px;}
+  .step::before{
+    content:'';position:absolute;left:-8px;top:9px;width:13px;height:13px;border-radius:50%;
+    background:var(--paper);border:3px solid var(--red);
+  }
+  .step .t{
+    font-family:var(--display);font-weight:700;font-size:15px;color:var(--red);
+    letter-spacing:.04em;
+  }
+  .step h4{font-family:var(--display);text-transform:uppercase;font-size:19px;margin:2px 0 6px;}
+  .step p{margin-bottom:8px;font-size:15.5px;}
+  .step ul{margin:4px 0 8px 22px;font-size:15px;}
+  .step ul li{margin-bottom:3px;}
+
+  .callout{
+    background:#fff;border:1.5px dashed var(--gold);border-radius:10px;
+    padding:20px 24px;margin:24px 0;
+  }
+  .callout .label{
+    font-family:var(--ui);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold);font-weight:700;display:block;margin-bottom:6px;
+  }
+  .callout p:last-child{margin-bottom:0;}
+
+  /* ---------- PITCH ---------- */
+  .pitch-lines{margin:24px 0;display:grid;gap:12px;max-width:720px;}
+  .pline{
+    display:grid;grid-template-columns:170px 1fr;gap:16px;align-items:baseline;
+    background:#fff;border:1.5px solid var(--ink);border-radius:8px;padding:14px 18px;
+  }
+  @media(max-width:560px){.pline{grid-template-columns:1fr;gap:4px;}}
+  .pline .cue{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:19px;}
+  .pline:nth-child(1) .cue{color:var(--red);}
+  .pline:nth-child(2) .cue{color:var(--smart);}
+  .pline:nth-child(3) .cue{color:var(--kind);}
+  .pline:nth-child(4) .cue{color:var(--smart);}
+  .pline:nth-child(5) .cue{color:var(--kind);}
+  .pline .what{font-size:15.5px;color:var(--ink-soft);}
+
+  .coach{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin:18px 0;}
+  .coach div{
+    background:#fff;border:1px solid var(--line);border-left:4px solid var(--smart);
+    border-radius:6px;padding:10px 14px;font-size:14.5px;font-family:var(--ui);
+  }
+  .coach div:nth-child(even){border-left-color:var(--kind);}
+
+  /* ---------- AWARDS ---------- */
+  .awards{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0;}
+  .award{
+    font-family:var(--display);text-transform:uppercase;font-size:16px;letter-spacing:.03em;
+    background:var(--ink);color:#F5EFE3;padding:9px 18px;border-radius:999px;
+    border:2px solid var(--ink);
+  }
+  .award:nth-child(3n+1){background:var(--red);border-color:var(--red);color:#fff;}
+  .award:nth-child(3n+2){background:#fff;color:var(--ink);}
+
+  /* ---------- FACILITATION ---------- */
+  .qbank{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin:20px 0;}
+  .qbank div{
+    background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 16px;
+    font-style:italic;font-size:15.5px;
+  }
+  .killer{
+    background:var(--red);color:#fff;border-radius:10px;padding:24px 28px;margin:26px 0;
+    max-width:640px;
+  }
+  .killer .label{
+    font-family:var(--ui);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    font-weight:700;display:block;margin-bottom:6px;opacity:.85;
+  }
+  .killer p{font-size:23px;font-style:italic;margin:0;font-family:var(--body);}
+
+  /* ---------- PRINTABLES ---------- */
+  .sheet{
+    background:#fff;border:1.5px solid var(--ink);border-radius:10px;
+    margin:26px 0;box-shadow:5px 5px 0 rgba(28,23,18,.1);overflow:hidden;
+  }
+  .sheet-bar{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    background:var(--paper-deep);border-bottom:1.5px solid var(--ink);padding:12px 20px;
+  }
+  .sheet-bar h3{margin:0;font-size:19px;}
+  .btn{
+    font-family:var(--ui);font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    background:var(--ink);color:#fff;border:none;border-radius:6px;padding:9px 16px;cursor:pointer;
+    transition:background .15s;white-space:nowrap;
+  }
+  .btn:hover{background:var(--red);}
+  .sheet-body{padding:26px 30px;font-size:15.5px;}
+  .sheet-body h4{font-family:var(--display);text-transform:uppercase;font-size:17px;margin:18px 0 6px;letter-spacing:.03em;}
+  .sheet-body h4:first-child{margin-top:0;}
+  .sheet-body ul{margin:6px 0 12px 22px;}
+  .sheet-body li{margin-bottom:4px;}
+  .writebox{
+    border:1.5px solid var(--line);border-radius:6px;min-height:64px;margin:6px 0 14px;
+    background:repeating-linear-gradient(to bottom,transparent 0 27px,var(--paper-deep) 27px 28px);
+  }
+  .writebox.tall{min-height:96px;}
+  .sheet-title{
+    font-family:var(--display);text-transform:uppercase;font-weight:700;font-size:26px;
+    margin-bottom:2px;
+  }
+  .sheet-sub{font-style:italic;color:var(--ink-soft);margin-bottom:16px;}
+  .checklist-print{list-style:none;margin:8px 0 !important;}
+  .checklist-print li{padding-left:30px;position:relative;margin-bottom:8px;}
+  .checklist-print li::before{
+    content:'';position:absolute;left:0;top:3px;width:16px;height:16px;
+    border:1.5px solid var(--ink);border-radius:3px;
+  }
+  .focus-card-print{
+    border:2px solid var(--ink);border-radius:10px;padding:18px 22px;margin:0 0 18px;
+    page-break-inside:avoid;
+  }
+  .focus-card-print .fc-num{
+    font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.12em;
+    text-transform:uppercase;color:#fff;background:var(--red);
+    display:inline-block;padding:2px 10px;border-radius:999px;margin-bottom:6px;
+  }
+  .focus-card-print h4{margin:0 0 4px;font-size:20px;}
+  .focus-card-print .q{font-style:italic;margin-bottom:8px;}
+  .focus-card-print ul{columns:2;margin-left:20px;font-size:14px;}
+  @media(max-width:560px){.focus-card-print ul{columns:1;}}
+
+  /* ---------- PREP CHECKLIST ---------- */
+  .prep{list-style:none;margin:20px 0;display:grid;gap:8px;max-width:720px;}
+  .prep li{
+    display:flex;align-items:flex-start;gap:12px;background:#fff;
+    border:1px solid var(--line);border-radius:8px;padding:12px 16px;cursor:pointer;
+    font-family:var(--ui);font-size:15px;transition:opacity .2s;
+  }
+  .prep li input{margin-top:3px;width:17px;height:17px;accent-color:var(--red);cursor:pointer;flex-shrink:0;}
+  .prep li.done{opacity:.45;text-decoration:line-through;}
+  .prep .grp{
+    font-family:var(--display);text-transform:uppercase;font-size:15px;letter-spacing:.08em;
+    color:var(--red);margin-top:12px;font-weight:700;border:none;background:none;
+    padding:4px 0 0;cursor:default;text-decoration:none !important;opacity:1 !important;
+  }
+  .prep-count{font-family:var(--ui);font-size:14px;color:var(--ink-soft);}
+
+  footer{
+    text-align:center;padding:40px 24px 60px;font-family:var(--ui);
+    font-size:13px;color:var(--ink-soft);border-top:1.5px solid var(--line);
+  }
+  footer b{color:var(--red);}
+
+  /* ---------- PRINT ---------- */
+  @media print{
+    nav,.hero-chips,.btn{display:none !important;}
+    body{background:#fff;}
+    body.print-one{visibility:hidden;}
+    body.print-one .print-target{visibility:visible;position:absolute;top:0;left:0;width:100%;}
+    body.print-one .print-target *{visibility:visible;}
+    .sheet{border:none;box-shadow:none;margin:0;}
+    .sheet-bar{display:none;}
+    .sheet-body{padding:10px 4px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">YOUTH FUTURES <b>LAB</b></span>
+  <a href="contents.html" style="color:#fff;">⌂ All Resources</a>
+  <a href="#idea">The Idea</a>
+  <a href="#runsheet">Run Sheet</a>
+  <a href="#teams">Teams</a>
+  <a href="#focus">Focus Areas</a>
+  <a href="#ws1">Workshop 1</a>
+  <a href="#ws2">Workshop 2</a>
+  <a href="#pitch">The Pitch</a>
+  <a href="#showcase">Showcase</a>
+  <a href="#facilitation">Facilitation</a>
+  <a href="#printables">Printables</a>
+  <a href="#prep">Prep Checklist</a>
+  <a href="team-guide.html" style="color:var(--gold);">Team Guide →</a>
+  <a href="teachers.html" style="color:var(--gold);">Teacher Version →</a>
+  <a href="students.html" style="color:var(--gold);">Student Slides →</a>
+  <a href="slides.html" style="color:var(--gold);">Day Deck →</a>
+  <a href="certificates.html" style="color:var(--gold);">Certificates →</a>
+</nav>
+
+<header>
+  <div class="kicker">TEDxNewy · Youth Futures Lab · Friday 7 August 2026</div>
+  <h1 class="hero"><span class="smart">Smart</span> <span class="plus">+</span> <span class="kind">Kind</span><br>Newcastle</h1>
+  <p class="hero-sub">A team-based civic design challenge for high school students, ending in TED-style pitches. Students act as youth consultants advising the council.</p>
+  <div class="hero-chips">
+    <span class="chip red">Fri 7 Aug 2026</span>
+    <span class="chip">9:30 am – 2:30 pm</span>
+    <span class="chip">~7 schools · 60–75 students</span>
+    <span class="chip">10–14 teams of 5–6</span>
+    <span class="chip">2-minute pitches</span>
+  </div>
+  <div class="hero-brief">
+    <span class="label">What we'll tell the students</span>
+    Today, you are consultants working for the council. Your job is to choose one part of city life and design a new idea, improvement, service, space, campaign, or invention that would make Newcastle both <strong>smarter</strong> and <strong>kinder</strong> for young people.
+  </div>
+</header>
+
+<main>
+
+<!-- ============ THE IDEA ============ -->
+<section id="idea">
+  <div class="sec-head"><span class="sec-num">1</span><h2>The Big Idea</h2></div>
+  <p class="lede">The key phrase is: <strong>design a smarter and kinder Newcastle.</strong></p>
+  <div class="duo">
+    <div class="card smart">
+      <h4>Smart</h4>
+      <p>Brings in systems, technology, transport, infrastructure, data, planning and innovation. A smart city works well.</p>
+    </div>
+    <div class="card kind">
+      <h4>Kind</h4>
+      <p>Stops it becoming a cold techno-utopia with LED benches and facial-recognition bins. Brings in care, belonging, safety, accessibility, creativity, cost, mental health, and the lived experience of young people. A kind city cares about people.</p>
+    </div>
+  </div>
+  <div class="pull">The future is not only something adults build for young people. It is something young people should help imagine, shape, challenge, and explain.</div>
+  <p>The day should feel less like a competition and more like a <strong>civic imagination lab</strong>. The magic is not just "which team has the best idea?" — it's letting students discover that their observations are politically, socially, and creatively meaningful. A 15-year-old saying, <em>"There are places for adults to spend money, but not many places for us to simply exist,"</em> is already a civic insight. The event should catch those insights before they evaporate.</p>
+</section>
+
+<!-- ============ RUN SHEET ============ -->
+<section id="runsheet">
+  <div class="sec-head"><span class="sec-num">2</span><h2>Run Sheet</h2></div>
+  <div class="table-scroll">
+  <table class="runsheet">
+    <tr><th>Time</th><th>Session</th><th>Purpose</th></tr>
+    <tr><td class="time">9:30</td><td><span class="sess">Registration &amp; team formation</span></td><td>Students arrive, form teams of 5–6, settle into tables</td></tr>
+    <tr class="milestone"><td class="time">10:00</td><td><span class="sess">Welcome + Challenge Brief</span></td><td>Introduce Youth Futures Lab, "smart + kind city", consultant role-play</td></tr>
+    <tr><td class="time">10:15</td><td><span class="sess">Workshop 1: See the City Differently</span><span class="why">Problems, possibilities &amp; pitching</span></td><td>Choose focus area, understand the challenge, learn basic TED-style pitch structure</td></tr>
+    <tr><td class="time">11:00</td><td><span class="sess">Break</span></td><td>Reset</td></tr>
+    <tr><td class="time">11:15</td><td><span class="sess">Workshop 2: Build the Future Proposal</span><span class="why">Guided teamwork · remix moment ~11:45</span></td><td>Teams develop their idea, create assets, prepare their concept</td></tr>
+    <tr><td class="time">12:15</td><td><span class="sess">Lunch — mini-expo</span><span class="why">Teams leave visuals on tables so everyone can wander the ideas</span></td><td>Pause, informal idea exchange</td></tr>
+    <tr><td class="time">1:00</td><td><span class="sess">Team practice + pitch coaching</span></td><td>Teams rehearse, refine, receive quick feedback</td></tr>
+    <tr class="milestone"><td class="time">1:30</td><td><span class="sess">Final pitch presentations</span></td><td>2-minute team pitches to panel / audience / council guests</td></tr>
+    <tr><td class="time">2:20</td><td><span class="sess">Reflection + acknowledgements</span></td><td>Celebrate ideas, name key themes</td></tr>
+    <tr><td class="time">2:30</td><td><span class="sess">Wrap up</span></td><td>Departure</td></tr>
+  </table>
+  </div>
+</section>
+
+<!-- ============ TEAMS ============ -->
+<section id="teams">
+  <div class="sec-head"><span class="sec-num">3</span><h2>Teams &amp; the Task</h2></div>
+  <p>With around seven schools and roughly ten students per school: <strong>60–75 students → 10–14 teams of 5–6.</strong> Each table becomes a consultancy team. Schools sending ten students split into two teams.</p>
+  <div class="callout">
+    <span class="label">Grouping instinct</span>
+    <p>Start students in <strong>school-based teams</strong> unless Maggie has a strong reason to mix them immediately. For a fast day, comfort matters. Then build in a cross-pollination moment (the 11:45 remix) so they still encounter other ideas.</p>
+  </div>
+  <h3>Every team must produce three things</h3>
+  <ul class="plain">
+    <li><strong>1. A future city idea</strong> — a new space, service, system, invention, campaign, policy, event, app, map, or improvement.</li>
+    <li><strong>2. A tangible asset</strong> — something visual or concrete that helps people understand the idea.</li>
+    <li><strong>3. A 2-minute TED-style pitch</strong> — a clear, persuasive explanation of the problem, the idea, and the future it creates.</li>
+  </ul>
+</section>
+
+<!-- ============ FOCUS AREAS ============ -->
+<section id="focus">
+  <div class="sec-head"><span class="sec-num">4</span><h2>Focus Area Catalogue</h2></div>
+  <p>Each team chooses <strong>one</strong> focus area — teen-centred, not council-bureaucratic. Tap a card to see example directions. <em>(Printable table cards are in the Printables section.)</em></p>
+  <div class="fa-grid">
+    <details class="fa"><summary><span class="fa-num">01</span><h4>Getting Around</h4><p class="q">How can young people move around Newcastle more freely, safely, cheaply, and independently?</p></summary>
+      <div class="ideas"><p>Possible ideas</p><ul><li>Better buses for students</li><li>Safer bike paths</li><li>Youth transport passes</li><li>Better walking routes</li><li>Night-time safe transport</li><li>"Get home safely" systems</li></ul></div>
+    </details>
+    <details class="fa"><summary><span class="fa-num">02</span><h4>Places to Hang Out</h4><p class="q">Where can young people spend time without needing to buy something or being moved on?</p></summary>
+      <div class="ideas"><p>Possible ideas</p><ul><li>Youth-friendly public spaces</li><li>Better parks and waterfront areas</li><li>Study/social hubs</li><li>Skate, music, gaming, art or chill zones</li><li>Weather-safe hangout spaces</li></ul></div>
+    </details>
+    <details class="fa"><summary><span class="fa-num">03</span><h4>Digital Life in the City</h4><p class="q">How could technology make city life better without making it colder or more controlled?</p></summary>
+      <div class="ideas"><p>Possible ideas</p><ul><li>Public Wi-Fi</li><li>Interactive city maps</li><li>Youth event apps</li><li>Digital noticeboards</li><li>Accessible information systems</li><li>Tech that helps connection rather than surveillance</li></ul></div>
+    </details>
+    <details class="fa"><summary><span class="fa-num">04</span><h4>Feeling Safe, Not Watched</h4><p class="q">How can a city help young people feel safe without making them feel controlled?</p></summary>
+      <div class="ideas"><p>Possible ideas</p><ul><li>Better lighting</li><li>Safer transport stops</li><li>Peer support systems</li><li>Welcoming public spaces</li><li>Anti-harassment campaigns</li><li>Alternatives to over-surveillance</li></ul></div>
+    </details>
+    <details class="fa"><summary><span class="fa-num">05</span><h4>The Cost of Being Young</h4><p class="q">What would Newcastle look like if being a teenager was less expensive?</p></summary>
+      <div class="ideas"><p>Possible ideas</p><ul><li>Cheap food maps</li><li>Free activities</li><li>Youth discounts</li><li>Shared equipment libraries</li><li>Low-cost events</li><li>Free transport days</li></ul></div>
+    </details>
+    <details class="fa"><summary><span class="fa-num">06</span><h4>Learning Beyond School</h4><p class="q">Where else can young people learn, study, make, experiment, and get support?</p></summary>
+      <div class="ideas"><p>Possible ideas</p><ul><li>Homework cafes</li><li>Public library upgrades</li><li>Maker spaces</li><li>Mentoring hubs</li><li>Quiet study spaces</li><li>Skill-sharing events</li></ul></div>
+    </details>
+    <details class="fa"><summary><span class="fa-num">07</span><h4>Mental Health &amp; Quiet Spaces</h4><p class="q">Where can young people go when everything feels too much?</p></summary>
+      <div class="ideas"><p>Possible ideas</p><ul><li>Calm rooms in public spaces</li><li>Quiet gardens</li><li>Sensory-friendly events</li><li>Mental health info points</li><li>Peer support spaces</li><li>Phone-free zones</li></ul></div>
+    </details>
+    <details class="fa"><summary><span class="fa-num">08</span><h4>Food &amp; Social Life</h4><p class="q">Where can young people eat, meet, and spend time in ways that are affordable and welcoming?</p></summary>
+      <div class="ideas"><p>Possible ideas</p><ul><li>Cheap eats map</li><li>Youth food markets</li><li>After-school food hubs</li><li>Community kitchens</li><li>Safe late-afternoon spaces</li><li>Social events without alcohol</li></ul></div>
+    </details>
+    <details class="fa"><summary><span class="fa-num">09</span><h4>Creative Expression</h4><p class="q">How can Newcastle become a better place for young people to make and share art, music, performance, games, writing, film, fashion, or design?</p></summary>
+      <div class="ideas"><p>Possible ideas</p><ul><li>Youth open mic events</li><li>Public art walls</li><li>Music rehearsal rooms</li><li>Mini festivals</li><li>Pop-up galleries</li><li>Digital art screens</li></ul></div>
+    </details>
+    <details class="fa"><summary><span class="fa-num">10</span><h4>Future You: Newcastle at 25</h4><p class="q">Would you want to stay in Newcastle as an adult? What would need to change?</p></summary>
+      <div class="ideas"><p>Possible ideas</p><ul><li>Youth jobs pathways</li><li>Housing affordability ideas</li><li>TAFE/university/career links</li><li>Creative industries</li><li>Climate resilience</li><li>Places for young adults to belong</li></ul></div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ WORKSHOP 1 ============ -->
+<section id="ws1">
+  <div class="sec-head"><span class="sec-num">5</span><h2>Workshop 1: See the City Differently</h2></div>
+  <p class="lede"><strong>10:00–11:00 am.</strong> Goal: students understand the challenge, choose a focus area, identify a real problem, and begin shaping an idea.</p>
+  <div class="flow">
+    <div class="step">
+      <span class="t">10:00 – 10:10</span>
+      <h4>Welcome &amp; framing</h4>
+      <p>Craig / Maggie introduce: the TEDx spirit (ideas worth sharing), Youth Futures Lab (young people as future thinkers), smart + kind Newcastle, and the consultant role-play.</p>
+      <p><em>"A smart city is not just a city with better technology. A smart city should also be kinder, fairer, safer, more creative, and more human."</em></p>
+    </div>
+    <div class="step">
+      <span class="t">10:10 – 10:20</span>
+      <h4>Choose a focus area</h4>
+      <p>Each team chooses one of the ten focus areas — focus cards printed on each table.</p>
+      <p><em>Prompt: "Pick a part of city life that actually affects you or people your age."</em></p>
+    </div>
+    <div class="step">
+      <span class="t">10:20 – 10:35</span>
+      <h4>Problem discovery</h4>
+      <p>Teams answer:</p>
+      <ul>
+        <li>What is the current problem?</li>
+        <li>Who does it affect?</li>
+        <li>Where does it happen?</li>
+        <li>What makes it frustrating, unfair, unsafe, boring, expensive, inaccessible, or overlooked?</li>
+        <li><strong>What do adults misunderstand about this issue?</strong> ← keep this one; it gives students permission to speak from lived experience</li>
+      </ul>
+    </div>
+    <div class="step">
+      <span class="t">10:35 – 10:50</span>
+      <h4>Idea generation</h4>
+      <p>Teams generate several possible solutions, then choose one. They can design: a place · a service · an app or digital tool · a campaign · an event · a new rule or policy · a map · a transport improvement · a public artwork · a physical object · a new kind of youth space.</p>
+    </div>
+    <div class="step">
+      <span class="t">10:50 – 11:00</span>
+      <h4>Mini TED pitch lesson</h4>
+      <p>Teach the three-line pitch spine: <strong style="color:var(--red)">Right now…</strong> (the problem) → <strong style="color:var(--smart)">But what if…</strong> (your idea) → <strong style="color:var(--kind)">Imagine if…</strong> (what changes). Simple, memorable, with a lovely rhetorical snap.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORKSHOP 2 ============ -->
+<section id="ws2">
+  <div class="sec-head"><span class="sec-num">6</span><h2>Workshop 2: Build the Future Proposal</h2></div>
+  <p class="lede"><strong>11:15 am–12:15 pm.</strong> Goal: teams develop their idea into something visible, persuasive, and pitch-ready.</p>
+  <h3>Team outputs — at least one of</h3>
+  <p>Concept poster · map · sketch or labelled diagram · service design plan · app screen mock-up · advertisement · campaign slogan · prototype model · before/after city plan · storyboard · pitch slide · one-page council proposal.</p>
+  <h3>The eight idea checks</h3>
+  <p>Every team should be able to answer — this is the practical spine of the whole day:</p>
+  <ul class="plain">
+    <li><strong>1.</strong> What is the problem?</li>
+    <li><strong>2.</strong> What is your solution?</li>
+    <li><strong>3.</strong> Who is it for?</li>
+    <li><strong>4.</strong> Where would it happen?</li>
+    <li><strong>5.</strong> How is it <span style="color:var(--smart);font-weight:700">smart</span>?</li>
+    <li><strong>6.</strong> How is it <span style="color:var(--kind);font-weight:700">kind</span>?</li>
+    <li><strong>7.</strong> What would the council need to do?</li>
+    <li><strong>8.</strong> What would success look like?</li>
+  </ul>
+  <div class="callout">
+    <span class="label">~11:45 am · The Remix Moment</span>
+    <p><em>"Send one or two people from your team to visit another table. Find one idea you like, bring it back, and use it to improve your own proposal."</em></p>
+    <p>Or simply: <strong>"Steal one idea kindly."</strong> Five minutes is enough. It breaks the room open, improves weaker concepts, and makes the event feel collaborative rather than purely competitive.</p>
+  </div>
+  <div class="callout">
+    <span class="label">Lunch · Mini-Expo</span>
+    <p>Invite teams to leave their visual materials on tables so students, teachers and guests can wander through the ideas casually. The room becomes a small exhibition.</p>
+  </div>
+</section>
+
+<!-- ============ PITCH ============ -->
+<section id="pitch">
+  <div class="sec-head"><span class="sec-num">7</span><h2>The Pitch</h2></div>
+  <p class="lede"><strong>1:00–1:30 pm practice &amp; coaching · 2 minutes per team.</strong></p>
+  <div class="pitch-lines">
+    <div class="pline"><span class="cue">Right now…</span><span class="what">Describe the current problem.</span></div>
+    <div class="pline"><span class="cue">But what if…</span><span class="what">Introduce your idea.</span></div>
+    <div class="pline"><span class="cue">Imagine if…</span><span class="what">Explain the future your idea creates.</span></div>
+    <div class="pline"><span class="cue">Smarter because…</span><span class="what">Explain the practical / system benefit.</span></div>
+    <div class="pline"><span class="cue">Kinder because…</span><span class="what">Explain the human / community benefit.</span></div>
+  </div>
+  <h3>Coaching points</h3>
+  <div class="coach">
+    <div>Start with the problem, not the product</div>
+    <div>Use one clear idea</div>
+    <div>Speak to humans, not robots in blazers</div>
+    <div>Use a real example: "Imagine you're 15 and…"</div>
+    <div>Keep the language simple</div>
+    <div>One person doesn't have to do all the talking</div>
+    <div>Use the poster/map/prototype as support, not as a script</div>
+    <div>Finish with a strong sentence</div>
+  </div>
+  <div class="pull">Our idea matters because young people deserve a city that doesn't just include them in the future, but listens to them now.</div>
+</section>
+
+<!-- ============ SHOWCASE ============ -->
+<section id="showcase">
+  <div class="sec-head"><span class="sec-num">8</span><h2>Final Showcase</h2></div>
+  <p class="lede"><strong>1:30–2:20 pm.</strong> With 10–14 teams at 2 minutes each: 20–28 minutes of pitch time. Add transitions and applause and it's tight but possible.</p>
+  <ul class="plain">
+    <li>2-minute pitch</li>
+    <li>30 seconds transition / applause</li>
+    <li>Optional: <strong>one</strong> panel comment — not a full Q&amp;A</li>
+  </ul>
+  <div class="callout">
+    <span class="label">A listening panel, not a judging panel</span>
+    <p>Ask council guests to listen for: ideas that are <strong>practical</strong> · ideas that <strong>reveal something adults might miss</strong> · ideas that <strong>could be explored further</strong>. Avoid anything that feels like harsh judging.</p>
+  </div>
+  <h3>Recognition categories — many ways to shine</h3>
+  <p>Rather than a single "winner", several recognitions keep the TEDx spirit warm and generous — different types of intelligence get seen:</p>
+  <div class="awards">
+    <span class="award">Most Imaginative Future</span>
+    <span class="award">Smartest System Idea</span>
+    <span class="award">Kindest City Idea</span>
+    <span class="award">Strongest Youth Voice</span>
+    <span class="award">Best Pitch</span>
+    <span class="award">Best Visual Concept</span>
+    <span class="award">Most Practical Council Proposal</span>
+    <span class="award">Best "We Hadn't Thought of That" Idea</span>
+  </div>
+</section>
+
+<!-- ============ FACILITATION ============ -->
+<section id="facilitation">
+  <div class="sec-head"><span class="sec-num">9</span><h2>Facilitation Notes — Craig &amp; Maggie</h2></div>
+  <p class="lede">Your role across the day is not to give students answers. It's to ask the little hinge questions that open doors.</p>
+  <h3>Roaming questions</h3>
+  <div class="qbank">
+    <div>Who is this idea for?</div>
+    <div>Where would this happen?</div>
+    <div>What problem are you really solving?</div>
+    <div>How would a teenager experience this?</div>
+    <div>What would make this kinder?</div>
+    <div>What would make this smarter?</div>
+    <div>What would the council need to believe for this to happen?</div>
+    <div>What is the one-sentence version of your idea?</div>
+    <div>What would someone see, hear, or feel if this existed?</div>
+    <div>What is the part adults might not understand?</div>
+  </div>
+  <div class="killer">
+    <span class="label">The killer question — rescues almost any wandering group</span>
+    <p>"What changes because your idea exists?"</p>
+  </div>
+  <h3>Opening the day — suggested script</h3>
+  <div class="callout" style="border-style:solid;">
+    <p>Welcome to Youth Futures Lab.</p>
+    <p>Today, we are asking you to act as consultants to the council. Your job is to design an idea for a smarter and kinder Newcastle.</p>
+    <p>Smart matters. Cities need good systems, good transport, good information, good design, and good decisions. But smart is not enough.</p>
+    <p>A city also needs to be kind. It needs to feel safe, welcoming, creative, inclusive, affordable, accessible, and human.</p>
+    <p>So today, your challenge is to choose one part of city life that affects young people, notice what could be better, design a new idea, and pitch it back to us.</p>
+    <p>You might design a space, a service, an app, a campaign, a map, an event, a public artwork, a new rule, or something none of us have thought of yet. The important thing is that your idea should help people see Newcastle differently.</p>
+    <p>By the end of the day, your team will give a short pitch using three lines: <strong>Right now… But what if… Imagine if…</strong></p>
+    <p style="margin-bottom:0;">That is all a good idea needs to begin: a real problem, a shift in thinking, and a picture of a better future.</p>
+  </div>
+</section>
+
+<!-- ============ PRINTABLES ============ -->
+<section id="printables">
+  <div class="sec-head"><span class="sec-num">10</span><h2>Printables &amp; Resources</h2></div>
+  <p class="lede">Each resource below prints on its own — hit the print button on any sheet and only that sheet goes to the printer.</p>
+
+  <!-- Teacher letter -->
+  <div class="sheet" id="sheet-teacher">
+    <div class="sheet-bar"><h3>Teacher Guidance Letter</h3><button class="btn" onclick="printSheet('sheet-teacher')">Print this</button></div>
+    <div class="sheet-body">
+      <p>Dear teachers,</p>
+      <p>We are looking forward to welcoming your students to the TEDx Youth Futures Lab on Friday 7 August 2026.</p>
+      <p>The day will invite high school students to work in small consultancy teams to design ideas for a smarter and kinder Newcastle. Students will choose a focus area connected to young people's lives, develop a future-focused proposal, create a simple visual or practical asset, and deliver a short TED-style pitch at the end of the day.</p>
+      <p>Students do not need to prepare a finished idea before they arrive. However, it would be helpful if they spend a little time beforehand thinking about Newcastle from a young person's point of view.</p>
+      <p><strong>Before the event, students may like to consider:</strong></p>
+      <ul>
+        <li>What parts of Newcastle work well for young people?</li>
+        <li>What parts of the city feel difficult, expensive, unsafe, boring, inaccessible, or unwelcoming?</li>
+        <li>Where do young people currently spend time?</li>
+        <li>Where do young people feel they belong?</li>
+        <li>What do adults often misunderstand about young people's experience of the city?</li>
+        <li>What would make Newcastle easier, safer, more creative, more inclusive, or more enjoyable for teenagers?</li>
+        <li>What would make them want to stay connected to Newcastle in the future?</li>
+      </ul>
+      <p>On the day, students will be able to choose from focus areas such as transport, places to hang out, digital life, safety, cost, learning beyond school, mental health and quiet spaces, food and social spaces, creative expression, and the future of Newcastle for young people.</p>
+      <p>Students are encouraged to bring curiosity, imagination, and a willingness to work with others. They may also bring a device if appropriate, although all activities will be designed so that students can participate with basic materials provided on the day.</p>
+      <p>We are especially interested in ideas that are both smart and kind: ideas that improve how the city works, while also making it more inclusive, human, creative, and welcoming.</p>
+      <p>Kind regards,</p>
+      <p><strong>Craig and Maggie</strong></p>
+    </div>
+  </div>
+
+  <!-- Student handout -->
+  <div class="sheet" id="sheet-student">
+    <div class="sheet-bar"><h3>Student Pre-Thinking Handout</h3><button class="btn" onclick="printSheet('sheet-student')">Print this</button></div>
+    <div class="sheet-body">
+      <div class="sheet-title">Youth Futures Lab</div>
+      <div class="sheet-sub">Before the day: start noticing your city</div>
+      <p>At Youth Futures Lab, you will work in a small team as a group of young consultants advising the council.</p>
+      <p><strong>Your challenge:</strong> design an idea that would make Newcastle smarter and kinder for young people.</p>
+      <p><em>A smart city works well. A kind city cares about people.</em></p>
+      <p>Before the event, start noticing the city around you. <strong>Think about:</strong></p>
+      <ul>
+        <li>Where do young people feel welcome?</li>
+        <li>Where do young people feel unwelcome?</li>
+        <li>How easy is it to get around?</li>
+        <li>What costs too much?</li>
+        <li>Where do you go when you want to be with friends?</li>
+        <li>Where do you go when you need quiet?</li>
+        <li>What places feel safe?</li>
+        <li>What places feel uncomfortable?</li>
+        <li>What would make Newcastle better for teenagers?</li>
+        <li>What do adults often miss or misunderstand?</li>
+      </ul>
+      <p>You do not need to arrive with a finished idea. Just bring observations.</p>
+      <p>On the day, your team will choose one focus area, design a future idea, create something visual or practical to explain it, and pitch your idea to the room. Your pitch will answer:</p>
+      <p><strong>Right now…</strong> What is the problem?<br>
+      <strong>But what if…</strong> What is your idea?<br>
+      <strong>Imagine if…</strong> What would change?</p>
+      <p><em>The best ideas do not have to be huge. Sometimes a small change can help people see the whole city differently.</em></p>
+    </div>
+  </div>
+
+  <!-- Team worksheet -->
+  <div class="sheet" id="sheet-worksheet">
+    <div class="sheet-bar"><h3>Team Worksheet</h3><button class="btn" onclick="printSheet('sheet-worksheet')">Print this</button></div>
+    <div class="sheet-body">
+      <div class="sheet-title">Consultancy Team Worksheet</div>
+      <div class="sheet-sub">Youth Futures Lab · Smart + Kind Newcastle</div>
+      <h4>Team name — give your consultancy a name</h4>
+      <div class="writebox"></div>
+      <h4>Focus area — which part of city life are you working on?</h4>
+      <div class="writebox"></div>
+      <h4>The problem — what is happening now?</h4>
+      <div class="writebox tall"></div>
+      <h4>Who is affected? — who experiences this problem most?</h4>
+      <div class="writebox"></div>
+      <h4>What adults might miss — what do young people understand about this issue that adults may not?</h4>
+      <div class="writebox tall"></div>
+      <h4>Our idea — what are you proposing?</h4>
+      <div class="writebox tall"></div>
+      <h4>Make it smart — how does it improve how the city works?</h4>
+      <div class="writebox"></div>
+      <h4>Make it kind — how does it improve how people feel, belong, access, connect, or participate?</h4>
+      <div class="writebox"></div>
+      <h4>Make it real — what will you create to explain your idea?</h4>
+      <div class="writebox"></div>
+      <h4>Pitch</h4>
+      <p style="margin-bottom:4px;"><strong>Right now…</strong></p><div class="writebox"></div>
+      <p style="margin-bottom:4px;"><strong>But what if…</strong></p><div class="writebox"></div>
+      <p style="margin-bottom:4px;"><strong>Imagine if…</strong></p><div class="writebox"></div>
+    </div>
+  </div>
+
+  <!-- Pitch template -->
+  <div class="sheet" id="sheet-pitch">
+    <div class="sheet-bar"><h3>Pitch Template Sheet</h3><button class="btn" onclick="printSheet('sheet-pitch')">Print this</button></div>
+    <div class="sheet-body">
+      <div class="sheet-title">Your 2-Minute Pitch</div>
+      <div class="sheet-sub">Youth Futures Lab · one clear idea, spoken to humans</div>
+      <h4>Right now… (describe the current problem)</h4>
+      <div class="writebox tall"></div>
+      <h4>But what if… (introduce your idea)</h4>
+      <div class="writebox tall"></div>
+      <h4>Imagine if… (explain the future your idea creates)</h4>
+      <div class="writebox tall"></div>
+      <h4>This makes Newcastle smarter because…</h4>
+      <div class="writebox"></div>
+      <h4>This makes Newcastle kinder because…</h4>
+      <div class="writebox"></div>
+      <h4>Our strong final sentence</h4>
+      <div class="writebox"></div>
+      <p><em>Remember: start with the problem, not the product · one clear idea · share the talking · your poster supports you, it isn't your script.</em></p>
+    </div>
+  </div>
+
+  <!-- Focus cards -->
+  <div class="sheet" id="sheet-cards">
+    <div class="sheet-bar"><h3>Focus Area Table Cards (×10)</h3><button class="btn" onclick="printSheet('sheet-cards')">Print this</button></div>
+    <div class="sheet-body" id="focus-cards-print"></div>
+  </div>
+
+  <!-- Panel listening card -->
+  <div class="sheet" id="sheet-panel">
+    <div class="sheet-bar"><h3>Council Guest — Listening Panel Card</h3><button class="btn" onclick="printSheet('sheet-panel')">Print this</button></div>
+    <div class="sheet-body">
+      <div class="sheet-title">Thank You for Listening</div>
+      <div class="sheet-sub">Youth Futures Lab · Smart + Kind Newcastle · Friday 7 August 2026</div>
+      <p>Today you'll hear 2-minute pitches from teams of high school students acting as youth consultants to the council. This is a <strong>listening panel, not a judging panel</strong> — your role is to receive their ideas warmly and take them seriously.</p>
+      <h4>As you listen, note:</h4>
+      <ul class="checklist-print">
+        <li>Ideas that are <strong>practical</strong> — something that could genuinely begin</li>
+        <li>Ideas that <strong>reveal something adults might miss</strong> about young people's experience of the city</li>
+        <li>Ideas that <strong>could be explored further</strong> after today</li>
+      </ul>
+      <h4>After each pitch (optional)</h4>
+      <p>One brief, encouraging comment — an observation, not a critique. A question you're curious about counts. Please avoid scoring language ("that was better than…").</p>
+      <h4>Jot ideas worth following up</h4>
+      <div class="writebox tall"></div>
+      <div class="writebox tall"></div>
+      <p><em>If you find yourself thinking "I hadn't thought of that" — say it out loud. It will make a student's day.</em></p>
+    </div>
+  </div>
+
+  <!-- Facilitator run card -->
+  <div class="sheet" id="sheet-runcard">
+    <div class="sheet-bar"><h3>Facilitator Pocket Run Card — Craig &amp; Maggie</h3><button class="btn" onclick="printSheet('sheet-runcard')">Print this</button></div>
+    <div class="sheet-body">
+      <div class="sheet-title">Run Card · Fri 7 Aug 2026</div>
+      <div class="sheet-sub">Times · cues · the questions that rescue tables</div>
+      <h4>Timeline &amp; cues</h4>
+      <ul>
+        <li><strong>9:30</strong> — Registration. Holding slide up. Teams of 5–6 settle at tables.</li>
+        <li><strong>10:00</strong> — Welcome. Opening script (slide 2–4): TEDx spirit → consultant brief → smart + kind.</li>
+        <li><strong>10:15</strong> — WS1. Choose focus area (8 min timer) → problem discovery (15) → idea generation (15) → pitch lesson.</li>
+        <li><strong>11:00</strong> — Break (15 min timer).</li>
+        <li><strong>11:15</strong> — WS2. Build (60 min timer). Keep the 8 idea checks slide handy.</li>
+        <li><strong>~11:45</strong> — REMIX CUE: "Steal one idea kindly" (5 min timer). Don't skip this.</li>
+        <li><strong>12:15</strong> — Lunch. Announce mini-expo: materials stay on tables.</li>
+        <li><strong>1:00</strong> — Rehearsal + coaching (30 min). Roam with the questions below.</li>
+        <li><strong>1:30</strong> — Pitches. 2 min each + 30 sec transition. Reset pitch timer between teams. Optional single panel comment.</li>
+        <li><strong>2:20</strong> — Reflection: name the themes. Recognitions. <strong>2:30 hard finish.</strong></li>
+      </ul>
+      <h4>Roaming questions (don't give answers — open doors)</h4>
+      <ul>
+        <li>Who is this idea for? Where would it happen?</li>
+        <li>What problem are you really solving?</li>
+        <li>How would a teenager experience this?</li>
+        <li>What would make this kinder? Smarter?</li>
+        <li>What's the one-sentence version of your idea?</li>
+        <li>What's the part adults might not understand?</li>
+        <li><strong>The rescue question: "What changes because your idea exists?"</strong></li>
+      </ul>
+      <h4>Watch for</h4>
+      <ul>
+        <li>Teams stuck choosing → "Pick the one that actually annoys you."</li>
+        <li>Teams with 5 ideas at 11:30 → "Choose one. Steal from the rest."</li>
+        <li>One-voice teams → "Who's presenting which line?"</li>
+        <li>Insights worth catching → photograph posters, note quotes for reflection.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Materials checklist -->
+  <div class="sheet" id="sheet-materials">
+    <div class="sheet-bar"><h3>Table Kit &amp; Materials Checklist</h3><button class="btn" onclick="printSheet('sheet-materials')">Print this</button></div>
+    <div class="sheet-body">
+      <div class="sheet-title">Materials to Prepare</div>
+      <div class="sheet-sub">One kit per table + room setup</div>
+      <h4>Every table</h4>
+      <ul class="checklist-print">
+        <li>Butcher's paper or A3 sheets</li>
+        <li>Markers</li>
+        <li>Sticky notes</li>
+        <li>Focus area cards</li>
+        <li>Pitch template sheet</li>
+        <li>Proposal planning sheet (team worksheet)</li>
+        <li>Blu Tack or tape</li>
+      </ul>
+      <h4>Room</h4>
+      <ul class="checklist-print">
+        <li>Timer visible in room</li>
+        <li>Simple slide deck with the day's structure (optional)</li>
+      </ul>
+      <h4>Optional extras</h4>
+      <ul class="checklist-print">
+        <li>Printed maps of Newcastle</li>
+        <li>Coloured dot stickers for voting / feedback</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PREP CHECKLIST ============ -->
+<section id="prep">
+  <div class="sec-head"><span class="sec-num">11</span><h2>Prep Checklist</h2></div>
+  <p class="lede">Everything to get done before Friday 7 August. Ticks save automatically on this device. <span class="prep-count" id="prep-count"></span></p>
+  <ul class="prep" id="prep-list">
+    <li class="grp">Communications</li>
+    <li data-k="c1"><input type="checkbox">Confirm final school list &amp; student numbers with Maggie</li>
+    <li data-k="c2"><input type="checkbox">Send teacher guidance letter to all schools</li>
+    <li data-k="c3"><input type="checkbox">Send student pre-thinking handout (via teachers)</li>
+    <li data-k="c4"><input type="checkbox">Invite council guests &amp; brief them on the "listening panel" role</li>
+    <li data-k="c5"><input type="checkbox">Confirm venue, tables (10–14), and AV / mic for pitches</li>
+    <li data-k="c6"><input type="checkbox">Decide team grouping with Maggie (school-based vs mixed)</li>
+    <li class="grp">Printing</li>
+    <li data-k="p1"><input type="checkbox">Print focus area cards (1 set per table)</li>
+    <li data-k="p2"><input type="checkbox">Print team worksheets (1–2 per table)</li>
+    <li data-k="p3"><input type="checkbox">Print pitch template sheets (1 per table)</li>
+    <li data-k="p4"><input type="checkbox">Print materials checklist for setup crew</li>
+    <li data-k="p5"><input type="checkbox">Optional: print Newcastle maps</li>
+    <li class="grp">Materials</li>
+    <li data-k="m1"><input type="checkbox">Butcher's paper / A3, markers, sticky notes, Blu Tack per table</li>
+    <li data-k="m2"><input type="checkbox">Timer for the room</li>
+    <li data-k="m3"><input type="checkbox">Dot stickers for voting (optional)</li>
+    <li class="grp">Run-of-day</li>
+    <li data-k="r1"><input type="checkbox">Build the day-structure slide deck</li>
+    <li data-k="r2"><input type="checkbox">Rehearse the opening script (smart + kind framing)</li>
+    <li data-k="r3"><input type="checkbox">Decide recognition categories &amp; prepare certificates</li>
+    <li data-k="r4"><input type="checkbox">Plan the 11:45 remix moment cue</li>
+    <li data-k="r5"><input type="checkbox">Assign roles for the day: MC, timer, roaming coaches, photos</li>
+    <li data-k="r6"><input type="checkbox">Plan how insights get captured on the day (photos of posters, note-taker, themes board)</li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  Youth Futures Lab · <b>Smart + Kind Newcastle</b> · TEDxNewy · Friday 7 August 2026 · Craig &amp; Maggie
+</footer>
+
+<script>
+// ---------- per-sheet printing ----------
+function printSheet(id){
+  const el = document.getElementById(id);
+  document.body.classList.add('print-one');
+  el.classList.add('print-target');
+  window.print();
+}
+window.addEventListener('afterprint', () => {
+  document.body.classList.remove('print-one');
+  document.querySelectorAll('.print-target').forEach(e => e.classList.remove('print-target'));
+});
+
+// ---------- build printable focus cards from the interactive catalogue ----------
+(function(){
+  const out = document.getElementById('focus-cards-print');
+  document.querySelectorAll('#focus .fa').forEach((fa, i) => {
+    const num = String(i+1).padStart(2,'0');
+    const title = fa.querySelector('h4').textContent;
+    const q = fa.querySelector('.q').textContent;
+    const ideas = [...fa.querySelectorAll('.ideas li')].map(li => `<li>${li.textContent}</li>`).join('');
+    out.insertAdjacentHTML('beforeend', `
+      <div class="focus-card-print">
+        <span class="fc-num">Focus Area ${num}</span>
+        <h4>${title}</h4>
+        <p class="q">${q}</p>
+        <ul>${ideas}</ul>
+      </div>`);
+  });
+})();
+
+// ---------- prep checklist with localStorage ----------
+(function(){
+  const KEY = 'yfl-prep-v1';
+  const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+  const items = document.querySelectorAll('#prep-list li[data-k]');
+  const count = document.getElementById('prep-count');
+  function refresh(){
+    let done = 0;
+    items.forEach(li => { if (li.querySelector('input').checked) done++; });
+    count.textContent = `${done} of ${items.length} done`;
+  }
+  items.forEach(li => {
+    const k = li.dataset.k;
+    const box = li.querySelector('input');
+    if (saved[k]) { box.checked = true; li.classList.add('done'); }
+    li.addEventListener('click', e => {
+      if (e.target !== box) box.checked = !box.checked;
+      li.classList.toggle('done', box.checked);
+      saved[k] = box.checked;
+      localStorage.setItem(KEY, JSON.stringify(saved));
+      refresh();
+    });
+  });
+  refresh();
+})();
+</script>
+</body>
+</html>

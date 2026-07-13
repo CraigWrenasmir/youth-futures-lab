@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Youth Futures Lab — Certificates</title>
+<style>
+  @page{size:A4 landscape;margin:0;}
+  :root{
+    --paper:#FAF5EC;
+    --ink:#1C1712;
+    --ink-soft:#5C5347;
+    --red:#E62B1E;
+    --smart:#0E7C86;
+    --kind:#E0592A;
+    --gold:#C99A2E;
+    --display:'Avenir Next Condensed','Futura-CondensedMedium','Arial Narrow','Helvetica Neue',Arial,sans-serif;
+    --body:'Charter','Georgia','Iowan Old Style',serif;
+    --ui:'Avenir Next','Avenir','Seravek','Helvetica Neue',Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#3A332A;font-family:var(--body);color:var(--ink);}
+  .toolbar{
+    position:sticky;top:0;z-index:10;background:#1C1712;color:#FAF5EC;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:12px 24px;font-family:var(--ui);font-size:14px;
+  }
+  .toolbar b{color:var(--red);}
+  .toolbar button{
+    font-family:var(--ui);font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    background:var(--red);color:#fff;border:none;border-radius:6px;padding:9px 18px;cursor:pointer;
+  }
+  .cert{
+    width:297mm;height:209mm;margin:24px auto;background:var(--paper);
+    position:relative;page-break-after:always;overflow:hidden;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:18mm 22mm;
+    box-shadow:0 8px 30px rgba(0,0,0,.4);
+  }
+  .cert .frame{
+    position:absolute;inset:8mm;border:1.2mm solid var(--ink);pointer-events:none;
+  }
+  .cert .frame::after{
+    content:'';position:absolute;inset:2.2mm;border:.4mm solid var(--gold);
+  }
+  .cert .corner{
+    position:absolute;width:16mm;height:16mm;pointer-events:none;
+  }
+  .corner.tl{top:5mm;left:5mm;border-top:2.2mm solid var(--red);border-left:2.2mm solid var(--red);}
+  .corner.tr{top:5mm;right:5mm;border-top:2.2mm solid var(--red);border-right:2.2mm solid var(--red);}
+  .corner.bl{bottom:5mm;left:5mm;border-bottom:2.2mm solid var(--red);border-left:2.2mm solid var(--red);}
+  .corner.br{bottom:5mm;right:5mm;border-bottom:2.2mm solid var(--red);border-right:2.2mm solid var(--red);}
+  .cert .event{
+    font-family:var(--ui);font-size:12px;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--red);font-weight:700;margin-bottom:6mm;
+  }
+  .cert .presented{
+    font-style:italic;font-size:16px;color:var(--ink-soft);margin-bottom:3mm;
+  }
+  .cert h1{
+    font-family:var(--display);font-weight:700;text-transform:uppercase;
+    font-size:52px;line-height:.95;letter-spacing:.01em;margin-bottom:8mm;max-width:220mm;
+  }
+  .cert h1 .a{color:var(--smart);}
+  .cert h1 .b{color:var(--kind);}
+  .cert .desc{
+    font-size:16.5px;color:var(--ink-soft);max-width:170mm;margin-bottom:10mm;font-style:italic;
+  }
+  .cert .teamline{
+    width:150mm;border-bottom:.5mm solid var(--ink);height:14mm;margin-bottom:2.5mm;
+  }
+  .cert .teamlabel{
+    font-family:var(--ui);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;margin-bottom:10mm;
+  }
+  .cert .footer{
+    display:flex;gap:26mm;align-items:flex-end;
+  }
+  .cert .sig{width:55mm;}
+  .cert .sig .line{border-bottom:.4mm solid var(--ink-soft);height:9mm;}
+  .cert .sig span{
+    font-family:var(--ui);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;
+  }
+  .cert .date{
+    font-family:var(--display);font-weight:700;font-size:15px;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--ink);padding-bottom:1.5mm;
+  }
+  @media print{
+    body{background:#fff;}
+    .toolbar{display:none;}
+    .cert{margin:0;box-shadow:none;}
+  }
+  @media(max-width:1200px){
+    .cert{transform-origin:top center;}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span><b>Youth Futures Lab</b> · Recognition certificates — 8 categories, one per A4 landscape page. Set printer to <b>Landscape</b>.</span>
+  <button onclick="window.print()">Print all 8</button>
+</div>
+
+<script>
+const AWARDS = [
+  ["Most <span class='a'>Imaginative</span> Future", "For the team whose idea helped the whole room see Newcastle differently."],
+  ["Smartest <span class='a'>System</span> Idea", "For the team whose idea would genuinely improve how the city works."],
+  ["Kindest <span class='b'>City</span> Idea", "For the team whose idea would make Newcastle more welcoming, inclusive, and human."],
+  ["Strongest <span class='b'>Youth Voice</span>", "For the team who spoke most powerfully from the lived experience of being young in this city."],
+  ["Best <span class='a'>Pitch</span>", "For the team who used their two minutes best: clear, confident and persuasive."],
+  ["Best <span class='b'>Visual</span> Concept", "For the team whose poster, map or prototype made their idea easy to understand the moment you saw it."],
+  ["Most Practical <span class='a'>Council Proposal</span>", "For the idea the council could genuinely begin exploring tomorrow."],
+  ["Best <span class='b'>“We Hadn't Thought of That”</span> Idea", "For the idea that revealed something adults might never have noticed."]
+];
+document.body.insertAdjacentHTML('beforeend', AWARDS.map(([title, desc]) => `
+  <div class="cert">
+    <div class="frame"></div>
+    <div class="corner tl"></div><div class="corner tr"></div>
+    <div class="corner bl"></div><div class="corner br"></div>
+    <div class="event">TEDxNewy · Youth Futures Lab · Smart + Kind Newcastle</div>
+    <div class="presented">This recognition is presented for</div>
+    <h1>${title}</h1>
+    <div class="desc">${desc}</div>
+    <div class="teamline"></div>
+    <div class="teamlabel">Consultancy team</div>
+    <div class="footer">
+      <div class="sig"><div class="line"></div><span>Craig</span></div>
+      <div class="date">Friday 7 August 2026</div>
+      <div class="sig"><div class="line"></div><span>Maggie</span></div>
+    </div>
+  </div>`).join(''));
+</script>
+</body>
+</html>

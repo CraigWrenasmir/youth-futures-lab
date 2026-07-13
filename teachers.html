@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Youth Futures Lab — Teacher Overview</title>
+<style>
+  :root{
+    --paper:#FAF5EC;
+    --paper-deep:#F2EADA;
+    --ink:#1C1712;
+    --ink-soft:#5C5347;
+    --red:#E62B1E;
+    --smart:#0E7C86;
+    --smart-soft:#E0F0F1;
+    --kind:#E0592A;
+    --kind-soft:#FBE8DD;
+    --gold:#C99A2E;
+    --line:#D9CDB8;
+    --display:'Avenir Next Condensed','Futura-CondensedMedium','Arial Narrow','Helvetica Neue',Arial,sans-serif;
+    --body:'Charter','Georgia','Iowan Old Style',serif;
+    --ui:'Avenir Next','Avenir','Seravek','Helvetica Neue',Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.55;
+  }
+  .page{max-width:820px;margin:0 auto;padding:40px 24px 70px;}
+
+  .topbar{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+    margin-bottom:30px;
+  }
+  .kicker{
+    font-family:var(--ui);font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--red);font-weight:700;
+  }
+  .btn{
+    font-family:var(--ui);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    background:var(--ink);color:#fff;border:none;border-radius:6px;padding:9px 16px;cursor:pointer;
+  }
+  .btn:hover{background:var(--red);}
+
+  h1{
+    font-family:var(--display);font-weight:700;text-transform:uppercase;
+    font-size:clamp(38px,7vw,62px);line-height:.95;margin-bottom:6px;
+  }
+  h1 .smart{color:var(--smart);}
+  h1 .kind{color:var(--kind);}
+  h1 .plus{color:var(--red);}
+  .subtitle{font-style:italic;color:var(--ink-soft);font-size:17px;margin-bottom:22px;}
+
+  .facts{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.5px;
+    background:var(--ink);border:1.5px solid var(--ink);border-radius:10px;overflow:hidden;
+    margin-bottom:30px;
+  }
+  .fact{background:#fff;padding:12px 16px;}
+  .fact .l{
+    font-family:var(--ui);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:700;display:block;
+  }
+  .fact .v{font-family:var(--display);font-weight:700;font-size:19px;text-transform:uppercase;}
+  .fact .v small{font-size:13px;text-transform:none;font-family:var(--ui);font-weight:600;color:var(--ink-soft);}
+
+  h2{
+    font-family:var(--display);font-weight:700;text-transform:uppercase;
+    font-size:23px;letter-spacing:.02em;margin:32px 0 10px;
+    padding-top:20px;border-top:1.5px solid var(--line);
+  }
+  h2 .n{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;
+    font-size:13px;margin-right:10px;transform:translateY(-2px);
+  }
+  p{margin-bottom:12px;}
+  .big{font-size:17.5px;}
+
+  .brief{
+    background:var(--ink);color:#F5EFE3;padding:20px 24px;border-left:8px solid var(--red);
+    border-radius:0 8px 8px 0;font-size:16.5px;margin:16px 0 6px;
+  }
+  .brief strong{color:#fff;}
+
+  .three{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0;}
+  .three div{
+    background:#fff;border:1.5px solid var(--ink);border-radius:10px;padding:16px 18px;
+    box-shadow:3px 3px 0 rgba(28,23,18,.1);
+  }
+  .three .stepnum{
+    font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.1em;color:#fff;
+    display:inline-block;padding:2px 10px;border-radius:999px;margin-bottom:8px;text-transform:uppercase;
+  }
+  .three div:nth-child(1) .stepnum{background:var(--red);}
+  .three div:nth-child(2) .stepnum{background:var(--smart);}
+  .three div:nth-child(3) .stepnum{background:var(--kind);}
+  .three h3{font-family:var(--display);text-transform:uppercase;font-size:18px;margin-bottom:4px;}
+  .three p{font-size:14.5px;color:var(--ink-soft);margin:0;}
+
+  table{width:100%;border-collapse:collapse;font-family:var(--ui);font-size:14.5px;background:#fff;border:1.5px solid var(--ink);margin:14px 0;}
+  td{padding:8px 14px;border-top:1px solid var(--line);vertical-align:top;}
+  tr:first-child td{border-top:none;}
+  td.time{font-family:var(--display);font-weight:700;font-size:15.5px;color:var(--red);white-space:nowrap;width:110px;}
+  tr.hl td{background:var(--paper-deep);font-weight:600;}
+
+  ul{margin:6px 0 14px 22px;}
+  li{margin-bottom:5px;}
+
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:0 30px;}
+  @media(max-width:620px){.cols{grid-template-columns:1fr;}}
+
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0;}
+  @media(max-width:560px){.duo{grid-template-columns:1fr;}}
+  .duo div{padding:14px 18px;border-radius:8px;font-size:15px;}
+  .duo .s{background:var(--smart-soft);border:1.5px solid var(--smart);}
+  .duo .k{background:var(--kind-soft);border:1.5px solid var(--kind);}
+  .duo b{font-family:var(--display);text-transform:uppercase;font-size:17px;display:block;margin-bottom:2px;}
+  .duo .s b{color:var(--smart);}
+  .duo .k b{color:var(--kind);}
+
+  .note{
+    background:#fff;border:1.5px dashed var(--gold);border-radius:10px;
+    padding:14px 20px;margin:16px 0;font-size:15px;
+  }
+  .note b{color:var(--gold);font-family:var(--ui);font-size:11px;letter-spacing:.16em;text-transform:uppercase;display:block;margin-bottom:4px;}
+
+  .pitch{font-size:16px;margin:10px 0;}
+  .pitch b{font-family:var(--display);text-transform:uppercase;font-size:17px;}
+  .pitch .r{color:var(--red);} .pitch .s{color:var(--smart);} .pitch .k{color:var(--kind);}
+
+  footer{
+    margin-top:36px;padding-top:18px;border-top:1.5px solid var(--line);
+    font-family:var(--ui);font-size:13px;color:var(--ink-soft);
+  }
+  footer b{color:var(--red);}
+
+  @media print{
+    body{background:#fff;font-size:12.5px;line-height:1.4;}
+    .page{padding:0;max-width:none;}
+    .btn{display:none;}
+    .facts,.three div,table,.note,.duo div{box-shadow:none;}
+    h2{margin-top:16px;padding-top:10px;font-size:19px;page-break-after:avoid;}
+    .three,.duo,table,.note{page-break-inside:avoid;}
+    .brief{padding:12px 16px;font-size:14px;}
+    .big{font-size:14px;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <span class="kicker">TEDxNewy Youth Futures Lab · Teacher Overview</span>
+    <button class="btn" onclick="window.print()">Print this page</button>
+  </div>
+
+  <h1><span class="smart">Smart</span> <span class="plus">+</span> <span class="kind">Kind</span> Newcastle</h1>
+  <p class="subtitle">A one-day civic design challenge where your students act as youth consultants advising the council. The day finishes with short TED-style pitches.</p>
+
+  <div class="facts">
+    <div class="fact"><span class="l">Date</span><span class="v">Fri 7 Aug 2026</span></div>
+    <div class="fact"><span class="l">Time</span><span class="v">9:30 – 2:30</span></div>
+    <div class="fact"><span class="l">Who</span><span class="v">~10 students <small>per school</small></span></div>
+    <div class="fact"><span class="l">Teams</span><span class="v">5 – 6 students</span></div>
+    <div class="fact"><span class="l">Prep needed</span><span class="v">Almost none <small>see below</small></span></div>
+  </div>
+
+  <h2><span class="n">1</span>The short version</h2>
+  <div class="brief">
+    Students work in small consultancy teams. Each team chooses one part of city life that affects young people — transport, hangout spaces, safety, cost, mental health, creativity and more — designs an idea that would make Newcastle <strong>smarter</strong> and <strong>kinder</strong>, creates a simple visual to explain it, and delivers a <strong>2-minute pitch</strong> to a friendly listening panel including council guests.
+  </div>
+  <div class="duo">
+    <div class="s"><b>Smart</b>A city that works well — systems, transport, technology, planning.</div>
+    <div class="k"><b>Kind</b>A city that cares about people — belonging, safety, access, affordability.</div>
+  </div>
+
+  <h2><span class="n">2</span>What students will actually do</h2>
+  <div class="three">
+    <div><span class="stepnum">Morning</span><h3>Notice &amp; choose</h3><p>Pick a focus area, name a real problem young people face, and generate ideas — including the question "what do adults misunderstand about this?"</p></div>
+    <div><span class="stepnum">Midday</span><h3>Design &amp; build</h3><p>Turn the best idea into a proposal with a tangible asset — a poster, map, mock-up, campaign, or model — using materials we provide.</p></div>
+    <div><span class="stepnum">Afternoon</span><h3>Pitch</h3><p>Rehearse with coaching, then present a 2-minute TED-style pitch. Multiple recognition categories — no single "winner".</p></div>
+  </div>
+  <p class="pitch">Every pitch follows three lines: <b class="r">Right now…</b> (the problem) → <b class="s">But what if…</b> (the idea) → <b class="k">Imagine if…</b> (what changes).</p>
+
+  <h2><span class="n">3</span>Timetable at a glance</h2>
+  <table>
+    <tr><td class="time">9:30 am</td><td>Arrival, registration &amp; team formation</td></tr>
+    <tr class="hl"><td class="time">10:00 am</td><td>Welcome + challenge brief</td></tr>
+    <tr><td class="time">10:15 am</td><td>Workshop 1: choose a focus area, find the problem, shape an idea</td></tr>
+    <tr><td class="time">11:00 am</td><td>Break</td></tr>
+    <tr><td class="time">11:15 am</td><td>Workshop 2: build the proposal + create the visual asset</td></tr>
+    <tr><td class="time">12:15 pm</td><td>Lunch — ideas stay on tables as a mini-expo</td></tr>
+    <tr><td class="time">1:00 pm</td><td>Rehearsal + pitch coaching</td></tr>
+    <tr class="hl"><td class="time">1:30 pm</td><td>Final 2-minute pitches to the listening panel</td></tr>
+    <tr><td class="time">2:20 pm</td><td>Reflection, recognitions &amp; wrap up by 2:30 pm</td></tr>
+  </table>
+
+  <h2><span class="n">4</span>Before the day — 10 minutes, no more</h2>
+  <p class="big">Students <strong>do not</strong> need to prepare an idea before they arrive. The only prep that helps is a short conversation — homeroom or the bus trip is plenty — getting them to start noticing their city:</p>
+  <div class="cols">
+    <ul>
+      <li>Where do young people feel welcome — or unwelcome?</li>
+      <li>How easy is it to get around? What costs too much?</li>
+      <li>Where do you go to be with friends? Where do you go for quiet?</li>
+    </ul>
+    <ul>
+      <li>What places feel safe or uncomfortable?</li>
+      <li>What would make Newcastle better for teenagers?</li>
+      <li>What do adults often miss or misunderstand?</li>
+    </ul>
+  </div>
+  <div class="note"><b>Who to bring</b>This day suits any student with opinions about their city — not just confident public speakers. Teams share the talking in pitches, and quieter students often shine in the design and visual work. Mixed year groups are fine.</div>
+
+  <h2><span class="n">5</span>Logistics</h2>
+  <ul>
+    <li><strong>All materials provided</strong> — paper, markers, worksheets, focus-area cards. Devices optional; nothing on the day requires one.</li>
+    <li><strong>Students from your school can work together</strong> — schools sending ten students will split into two teams.</li>
+    <li><strong>Teachers are welcome to roam</strong> during workshops and are our audience (with council guests) for the final pitches.</li>
+    <li><strong>Food:</strong> students should bring recess and lunch as normal unless advised otherwise.</li>
+  </ul>
+
+  <footer>
+    Questions? Contact <b>Craig &amp; Maggie</b> · TEDxNewy Youth Futures Lab · Friday 7 August 2026
+  </footer>
+
+</div>
+</body>
+</html>
