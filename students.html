@@ -159,6 +159,39 @@
   .slide > *:nth-child(2){animation-delay:.08s;}
   .slide > *:nth-child(3){animation-delay:.16s;}
   .slide > *:nth-child(4){animation-delay:.24s;}
+
+  /* edit toolbar */
+  .toolbar{
+    position:fixed;top:16px;left:16px;z-index:20;display:flex;gap:8px;flex-wrap:wrap;
+  }
+  .toolbtn{
+    font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    background:rgba(22,18,13,.8);color:var(--paper);border:1.5px solid var(--paper-dim);
+    border-radius:999px;padding:8px 15px;cursor:pointer;transition:all .15s;
+  }
+  .toolbtn:hover{border-color:var(--red);color:var(--red);}
+  .editnote{
+    position:fixed;top:58px;left:16px;z-index:20;
+    font-family:var(--ui);font-size:11.5px;font-style:italic;color:var(--gold);max-width:340px;
+  }
+  #deck[contenteditable="true"] .slide{outline:2px dashed var(--red);outline-offset:-10px;}
+
+  /* print: one landscape A4 page per slide, backgrounds kept */
+  @media print{
+    @page{size:A4 landscape;margin:0;}
+    html,body{background:var(--ink) !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .deck{height:auto;overflow:visible;scroll-snap-type:none;}
+    .slide{
+      min-height:0;height:209mm;overflow:hidden;
+      page-break-after:always;break-inside:avoid;
+      padding:16mm 22mm;justify-content:center;
+      -webkit-print-color-adjust:exact;print-color-adjust:exact;
+    }
+    .slide:last-child{page-break-after:auto;}
+    .slide > *{animation:none !important;opacity:1 !important;transform:none !important;}
+    .toolbar,.editnote,.navbtns,.dots,.hint{display:none !important;}
+    #deck[contenteditable="true"] .slide{outline:none;}
+  }
 </style>
 </head>
 <body>
@@ -268,6 +301,90 @@
 
 </div>
 
+<div class="toolbar">
+  <button class="toolbtn" id="editBtn" onclick="toggleEdit()">Edit slides</button>
+  <button class="toolbtn" onclick="downloadHTML()">Download HTML</button>
+  <button class="toolbtn" id="resetBtn" style="display:none" onclick="resetEdits()">Reset edits</button>
+  <button class="toolbtn" onclick="window.print()">Print / Save as PDF</button>
+</div>
+<div class="editnote" id="editnote"></div>
+
+<script>
+  const editDeck = document.getElementById('deck');
+  const ORIGINAL = editDeck.innerHTML;
+  const KEY = 'yfl-students-edits';
+
+  // Restore saved edits before the deck script binds — only if the page hasn't changed since
+  try{
+    const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if(saved && saved.base === ORIGINAL && saved.html !== ORIGINAL){
+      editDeck.innerHTML = saved.html;
+    }
+  }catch(e){}
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const resetBtn = document.getElementById('resetBtn');
+    const note = document.getElementById('editnote');
+    try{
+      const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if(saved && saved.base === ORIGINAL){
+        resetBtn.style.display = '';
+        note.textContent = 'Showing your saved edits (stored in this browser only).';
+      }
+    }catch(e){}
+
+    let saveTimer;
+    editDeck.addEventListener('input', () => {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => {
+        localStorage.setItem(KEY, JSON.stringify({base: ORIGINAL, html: editDeck.innerHTML}));
+        resetBtn.style.display = '';
+      }, 300);
+    });
+  });
+
+  function toggleEdit(){
+    const editBtn = document.getElementById('editBtn');
+    const note = document.getElementById('editnote');
+    const on = editDeck.getAttribute('contenteditable') === 'true';
+    if(on){
+      editDeck.removeAttribute('contenteditable');
+      editBtn.textContent = 'Edit slides';
+      note.textContent = document.getElementById('resetBtn').style.display !== 'none'
+        ? 'Edits saved in this browser. Download HTML to make them permanent.' : '';
+    }else{
+      editDeck.setAttribute('contenteditable','true');
+      editBtn.textContent = 'Done editing';
+      note.textContent = 'Click any text and type. Arrow keys move the cursor; scroll to change slides.';
+    }
+  }
+
+  function resetEdits(){
+    if(!confirm('Discard your edits and restore the original slides?')) return;
+    localStorage.removeItem(KEY);
+    location.reload();
+  }
+
+  function downloadHTML(){
+    if(editDeck.getAttribute('contenteditable') === 'true') toggleEdit();
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelector('#dots').innerHTML = '';
+    clone.querySelector('#deck').removeAttribute('contenteditable');
+    clone.querySelector('#hint').removeAttribute('style');
+    clone.querySelector('#editnote').textContent = '';
+    clone.querySelector('#resetBtn').style.display = 'none';
+    clone.querySelector('#editBtn').textContent = 'Edit slides';
+    const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+    const blob = new Blob([html], {type:'text/html'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'students.html';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    document.getElementById('editnote').textContent = 'Downloaded — replace students.html in the project folder with it to update the shared page.';
+  }
+</script>
+
 <div class="dots" id="dots"></div>
 <div class="navbtns">
   <button id="prev" aria-label="Previous slide">↑</button>
@@ -298,6 +415,7 @@
   document.getElementById('next').addEventListener('click', ()=>go(current+1));
   document.getElementById('prev').addEventListener('click', ()=>go(current-1));
   document.addEventListener('keydown', e=>{
+    if (deck.getAttribute('contenteditable') === 'true') return; // typing while editing
     if (['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)) { e.preventDefault(); go(current+1); }
     if (['ArrowUp','ArrowLeft','PageUp'].includes(e.key)) { e.preventDefault(); go(current-1); }
   });
