@@ -40,6 +40,10 @@
     background:var(--ink);color:#fff;border:none;border-radius:6px;padding:9px 16px;cursor:pointer;
   }
   .btn:hover{background:var(--red);}
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink);}
+  .btn.ghost:hover{background:var(--red);border-color:var(--red);color:#fff;}
+  .hint{font-family:var(--ui);font-size:12px;font-style:italic;color:var(--ink-soft);width:100%;min-height:15px;}
+  #doc[contenteditable="true"]{outline:2px dashed var(--red);outline-offset:14px;border-radius:2px;}
 
   h1{
     font-family:var(--display);font-weight:700;text-transform:uppercase;
@@ -137,7 +141,8 @@
   @media print{
     body{background:#fff;font-size:12.5px;line-height:1.4;}
     .page{padding:0;max-width:none;}
-    .btn{display:none;}
+    .btn,.hint{display:none;}
+    #doc[contenteditable="true"]{outline:none;}
     .facts,.three div,table,.note,.duo div{box-shadow:none;}
     h2{margin-top:16px;padding-top:10px;font-size:19px;page-break-after:avoid;}
     .three,.duo,table,.note{page-break-inside:avoid;}
@@ -151,8 +156,16 @@
 
   <div class="topbar">
     <span class="kicker">TEDxNewy Youth Futures Lab · Teacher Overview</span>
-    <button class="btn" onclick="window.print()">Print this page</button>
+    <span>
+      <button class="btn ghost" id="editBtn" onclick="toggleEdit()">Edit page</button>
+      <button class="btn ghost" onclick="downloadHTML()">Download HTML</button>
+      <button class="btn ghost" id="resetBtn" style="display:none" onclick="resetEdits()">Reset edits</button>
+      <button class="btn" onclick="window.print()">Print / Save as PDF</button>
+    </span>
+    <span class="hint" id="hint"></span>
   </div>
+
+  <div id="doc">
 
   <h1><span class="smart">Smart</span> <span class="plus">+</span> <span class="kind">Kind</span> Newcastle</h1>
   <p class="subtitle">A one-day civic design challenge where your students act as youth consultants advising the council. The day finishes with short TED-style pitches.</p>
@@ -223,6 +236,76 @@
     Questions? Contact <b>Craig &amp; Maggie</b> · TEDxNewy Youth Futures Lab · Friday 7 August 2026
   </footer>
 
+  </div><!-- /doc -->
+
 </div>
+
+<script>
+  const doc = document.getElementById('doc');
+  const ORIGINAL = doc.innerHTML;
+  const KEY = 'yfl-teachers-edits';
+  const editBtn = document.getElementById('editBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const hint = document.getElementById('hint');
+
+  // Restore saved edits — but only if the underlying page hasn't changed since they were made
+  try{
+    const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if(saved && saved.base === ORIGINAL && saved.html !== ORIGINAL){
+      doc.innerHTML = saved.html;
+      resetBtn.style.display = '';
+      hint.textContent = 'Showing your saved edits (stored in this browser only).';
+    }
+  }catch(e){}
+
+  let saveTimer;
+  doc.addEventListener('input', () => {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      localStorage.setItem(KEY, JSON.stringify({base: ORIGINAL, html: doc.innerHTML}));
+      resetBtn.style.display = '';
+    }, 300);
+  });
+
+  function toggleEdit(){
+    const on = doc.getAttribute('contenteditable') === 'true';
+    if(on){
+      doc.removeAttribute('contenteditable');
+      editBtn.textContent = 'Edit page';
+      hint.textContent = resetBtn.style.display !== 'none'
+        ? 'Edits saved in this browser. Download HTML to make them permanent.' : '';
+    }else{
+      doc.setAttribute('contenteditable','true');
+      editBtn.textContent = 'Done editing';
+      hint.textContent = 'Click any text and type. Changes save automatically as you go.';
+      doc.focus();
+    }
+  }
+
+  function resetEdits(){
+    if(!confirm('Discard your edits and restore the original text?')) return;
+    localStorage.removeItem(KEY);
+    doc.innerHTML = ORIGINAL;
+    if(doc.getAttribute('contenteditable') === 'true') toggleEdit();
+    resetBtn.style.display = 'none';
+    hint.textContent = '';
+  }
+
+  function downloadHTML(){
+    if(doc.getAttribute('contenteditable') === 'true') toggleEdit();
+    const hadEdits = resetBtn.style.display !== 'none';
+    resetBtn.style.display = 'none';
+    hint.textContent = '';
+    const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    if(hadEdits) resetBtn.style.display = '';
+    const blob = new Blob([html], {type:'text/html'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'teachers.html';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    hint.textContent = 'Downloaded — replace teachers.html in the project folder with it to update the shared page.';
+  }
+</script>
 </body>
 </html>
