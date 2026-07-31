@@ -164,6 +164,21 @@
   .slide > *:nth-child(2){animation-delay:.08s;}
   .slide > *:nth-child(3){animation-delay:.16s;}
   .slide > *:nth-child(4){animation-delay:.24s;}
+
+  /* print/export: one 16:9 page per slide, backgrounds kept, timers as static faces */
+  @media print{
+    @page{size:1920px 1080px;margin:0;}
+    html,body{background:var(--ink) !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .deck{height:auto;overflow:visible;scroll-snap-type:none;}
+    .slide{
+      min-height:0;height:1080px;overflow:hidden;
+      page-break-after:always;break-inside:avoid;
+      -webkit-print-color-adjust:exact;print-color-adjust:exact;
+    }
+    .slide:last-child{page-break-after:auto;}
+    .slide > *{animation:none !important;opacity:1 !important;transform:none !important;}
+    .timer .tbtns,.clock,.navbtns{display:none !important;}
+  }
 </style>
 </head>
 <body>
