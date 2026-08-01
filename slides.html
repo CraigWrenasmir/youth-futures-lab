@@ -159,6 +159,29 @@
     border:2px solid var(--paper-dim);background:rgba(22,18,13,.8);color:var(--paper);cursor:pointer;
   }
   .navbtns button:hover{border-color:var(--red);color:var(--red);}
+  .themebtn{
+    position:fixed;bottom:20px;left:20px;z-index:10;
+    font-size:20px;width:52px;height:52px;border-radius:50%;
+    border:2px solid var(--paper-dim);background:rgba(22,18,13,.8);color:var(--paper);cursor:pointer;
+  }
+  .themebtn:hover{border-color:var(--gold);color:var(--gold);}
+
+  /* light mode — for bright rooms */
+  body,.slide{transition:background-color .35s ease,color .35s ease;}
+  body.light{
+    --ink:#FAF5EC;
+    --ink2:#F0E7D6;
+    --paper:#1C1712;
+    --paper-dim:#6B6152;
+    --smart:#0E7C86;
+    --kind:#E0592A;
+    --gold:#A67C1E;
+  }
+  body.light .timer{background:rgba(28,23,18,.04);}
+  body.light .clock{background:rgba(242,234,218,.85);}
+  body.light .navbtns button,body.light .themebtn{background:rgba(250,245,236,.85);}
+  body.light .duo .s{background:rgba(14,124,134,.08);}
+  body.light .duo .k{background:rgba(224,89,42,.08);}
   @keyframes rise{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
   .slide > *{animation:rise .6s ease both;}
   .slide > *:nth-child(2){animation-delay:.08s;}
@@ -177,7 +200,7 @@
     }
     .slide:last-child{page-break-after:auto;}
     .slide > *{animation:none !important;opacity:1 !important;transform:none !important;}
-    .timer .tbtns,.clock,.navbtns{display:none !important;}
+    .timer .tbtns,.clock,.navbtns,.themebtn{display:none !important;}
   }
 </style>
 </head>
@@ -416,9 +439,20 @@
   <button id="prev" aria-label="Previous slide">↑</button>
   <button id="next" aria-label="Next slide">↓</button>
 </div>
+<button class="themebtn" id="themeBtn" aria-label="Toggle light / dark mode" title="Light / dark mode (L)">☀</button>
 
 <script>
 (function(){
+  // ---------- theme ----------
+  const themeBtn = document.getElementById('themeBtn');
+  function setTheme(light){
+    document.body.classList.toggle('light', light);
+    themeBtn.textContent = light ? '☾' : '☀';
+    try{ localStorage.setItem('yfl-deck-theme', light ? 'light' : 'dark'); }catch(e){}
+  }
+  themeBtn.addEventListener('click', ()=>setTheme(!document.body.classList.contains('light')));
+  try{ if (localStorage.getItem('yfl-deck-theme') === 'light') setTheme(true); }catch(e){}
+
   // ---------- navigation ----------
   const deck = document.getElementById('deck');
   const slides = [...document.querySelectorAll('.slide')];
@@ -433,6 +467,7 @@
     if (e.target.tagName === 'BUTTON') return;
     if (['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)) { e.preventDefault(); go(current+1); }
     if (['ArrowUp','ArrowLeft','PageUp'].includes(e.key)) { e.preventDefault(); go(current-1); }
+    if (e.key === 'l' || e.key === 'L') setTheme(!document.body.classList.contains('light'));
   });
   const obs = new IntersectionObserver(entries=>{
     entries.forEach(en=>{ if (en.isIntersecting) current = slides.indexOf(en.target); });
