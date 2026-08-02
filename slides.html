@@ -177,6 +177,20 @@
     --kind:#E0592A;
     --gold:#A67C1E;
   }
+  /* logo (dark/light variants) */
+  .yflogo{height:clamp(40px,8vh,80px);width:auto;align-self:flex-start;margin-bottom:2vh;}
+  .logo-light{display:none;}
+  body.light .logo-dark{display:none;}
+  body.light .logo-light{display:block;}
+
+  /* click-to-reveal fragments */
+  .frag{opacity:0;transform:translateY(14px);transition:opacity .4s ease,transform .4s ease;}
+  .frag.on{opacity:1;transform:none;}
+  .slide > .frag{animation:none;}
+
+  /* single-column numbered team steps */
+  .steps-list{grid-template-columns:1fr;max-width:950px;gap:1.7vh;}
+
   body.light .timer{background:rgba(28,23,18,.04);}
   body.light .clock{background:rgba(242,234,218,.85);}
   body.light .navbtns button,body.light .themebtn{background:rgba(250,245,236,.85);}
@@ -200,6 +214,7 @@
     }
     .slide:last-child{page-break-after:auto;}
     .slide > *{animation:none !important;opacity:1 !important;transform:none !important;}
+    .frag{opacity:1 !important;transform:none !important;}
     .timer .tbtns,.clock,.navbtns,.themebtn{display:none !important;}
   }
 </style>
@@ -208,8 +223,10 @@
 <div class="deck" id="deck">
 
   <!-- 1 · ARRIVAL HOLDING SLIDE -->
-  <section class="slide" data-n="1 / 21">
-    <div class="tag">TEDxNewy · Youth Futures Lab · Friday 7 August 2026</div>
+  <section class="slide" data-n="1 / 22">
+    <img class="yflogo logo-dark" src="assets/tedxnewy-white.png" alt="TEDxNewy">
+    <img class="yflogo logo-light" src="assets/tedxnewy-black.png" alt="TEDxNewy">
+    <div class="tag">Youth Futures Lab · Friday 7 August 2026</div>
     <h1><span class="smart">Smart</span> <span class="redx">+</span> <span class="kind">Kind</span><br>Newcastle</h1>
     <p class="big" style="margin-top:3vh;">Welcome — find your table, meet your team.</p>
     <p class="big">Then grab a pen: every table has a big sheet of paper with a question about Newcastle on it. <em>Wander the room — write, draw, vote, disagree.</em></p>
@@ -217,7 +234,7 @@
   </section>
 
   <!-- 2 · WELCOME -->
-  <section class="slide" data-n="2 / 21">
+  <section class="slide" data-n="2 / 22">
     <div class="tag">10:00 · Welcome</div>
     <h2>Ideas worth<br><span class="redx">sharing</span></h2>
     <p class="big">This is a TEDx event, and TEDx is built on a simple belief: a good idea, clearly told, can change how people see things.</p>
@@ -225,28 +242,28 @@
   </section>
 
   <!-- 3 · ENERGISER -->
-  <section class="slide" data-n="3 / 21">
+  <section class="slide" data-n="3 / 22">
     <div class="tag">Warm up · two minutes</div>
     <h2>Stand up <span class="redx">if…</span></h2>
     <div class="biglist">
-      <div>you caught a bus, train, or light rail to get here today</div>
-      <div>you've swum at a Newcastle beach this year</div>
-      <div>you know exactly where the best hot chips in town are</div>
-      <div>you've ever been asked to move on from a public place</div>
-      <div>you know a place in Newcastle that deserves better</div>
+      <div class="frag">you caught a bus, train, or light rail to get here today</div>
+      <div class="frag">you've swum at a Newcastle beach this year</div>
+      <div class="frag">you know exactly where the best hot chips in town are</div>
+      <div class="frag">you've ever been asked to move on from a public place</div>
+      <div class="frag">you know a place in Newcastle that deserves better</div>
     </div>
-    <p class="big dim" style="margin-top:4vh;">Still standing? Perfect — you're exactly who we need today. Sit down, consultants. Let's begin.</p>
+    <p class="big dim frag" style="margin-top:4vh;">Still standing? Perfect — you're exactly who we need today. Sit down, consultants. Let's begin.</p>
   </section>
 
   <!-- 4 · THE BRIEF -->
-  <section class="slide" data-n="4 / 21">
+  <section class="slide" data-n="4 / 22">
     <div class="tag">The challenge brief</div>
     <h2>You are <span class="redx">consultants</span><br>to the council</h2>
     <p class="big">Your job today: choose one part of city life and design a new idea, improvement, service, space, campaign, or invention that would make Newcastle both <b class="smart">smarter</b> and <b class="kind">kinder</b> for young people.</p>
   </section>
 
   <!-- 5 · SMART + KIND -->
-  <section class="slide" data-n="5 / 21">
+  <section class="slide" data-n="5 / 22">
     <div class="tag">The two words that matter</div>
     <h2><span class="smart">Smart</span> is not enough.<br><span class="kind">Kind</span> is not enough.</h2>
     <div class="duo">
@@ -257,7 +274,7 @@
   </section>
 
   <!-- 6 · THE DAY -->
-  <section class="slide" data-n="6 / 21">
+  <section class="slide" data-n="6 / 22">
     <div class="tag">The shape of the day</div>
     <h2>Here's the plan</h2>
     <div class="schedule">
@@ -272,57 +289,55 @@
   </section>
 
   <!-- 7 · WS1 TITLE -->
-  <section class="slide" data-n="7 / 21">
+  <section class="slide" data-n="7 / 22">
     <div class="tag">Workshop 1 · 10:15 – 11:00</div>
     <h2>See the city<br><span class="redx">differently</span></h2>
     <p class="big">Choose a focus area. Find a real problem. Start shaping an idea.</p>
   </section>
 
   <!-- 8 · FOCUS AREAS -->
-  <section class="slide" data-n="8 / 21">
+  <section class="slide" data-n="8 / 22">
     <div class="tag">First: choose your focus area</div>
     <h2>Pick what actually<br>affects <span class="gold">you</span></h2>
-    <div class="fa-wall">
-      <div><b>Getting Around</b><span>moving freely, safely, cheaply, independently</span></div>
-      <div><b>Places to Hang Out</b><span>time without buying something or being moved on</span></div>
-      <div><b>Digital Life</b><span>tech that connects, not controls</span></div>
-      <div><b>Safe, Not Watched</b><span>feeling safe without feeling surveilled</span></div>
-      <div><b>The Cost of Being Young</b><span>what if being a teenager cost less?</span></div>
-      <div><b>Learning Beyond School</b><span>places to study, make, experiment</span></div>
-      <div><b>Mental Health &amp; Quiet</b><span>where to go when it's all too much</span></div>
-      <div><b>Food &amp; Social Life</b><span>affordable, welcoming places to eat &amp; meet</span></div>
-      <div><b>Creative Expression</b><span>making &amp; sharing art, music, games, film</span></div>
-      <div><b>Future You: Newcastle at 25</b><span>would you stay? what would need to change?</span></div>
+    <div class="checks steps-list">
+      <div>Spread the ten <b class="gold">focus area cards</b> across your table.</div>
+      <div>Each person slides one card towards them — <em>the one that actually affects your life</em> — and says why in one sentence.</div>
+      <div>Set aside every card nobody chose.</div>
+      <div>Two or three cards left? Vote. Majority wins — there's no wrong choice.</div>
     </div>
+    <p class="big dim" style="margin-top:2.5vh;">Choose on <em>interest</em>, not ideas — you don't need a solution yet.</p>
     <div class="timer" data-min="8"><span class="tlabel">Choose your area</span><span class="digits">08:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
   </section>
 
   <!-- 9 · PROBLEM DISCOVERY -->
-  <section class="slide" data-n="9 / 21">
+  <section class="slide" data-n="9 / 22">
     <div class="tag">Problem discovery</div>
     <h2>What's really<br>going on?</h2>
-    <div class="biglist">
-      <div>What is the current problem?</div>
-      <div>Who does it affect?</div>
-      <div>Where does it happen?</div>
-      <div>What makes it frustrating, unfair, unsafe, boring, expensive, inaccessible, or overlooked?</div>
-      <div><b>What would someone only understand about this if they'd lived it?</b></div>
+    <div class="checks steps-list">
+      <div><b>Solo sprint — 3 minutes.</b> Everyone writes every problem they can see in your focus area. Aim for 3–10. Don't filter, don't discuss.</div>
+      <div><b>Go around.</b> Read your lists out loud, one person at a time.</div>
+      <div><b>Find the overlap.</b> What did more than one of you write? That shared problem is probably <em>your</em> problem.</div>
+      <div><b>Capture it on the team worksheet</b> — including: <em>what would someone only understand about this if they'd lived it?</em></div>
     </div>
+    <p class="big dim" style="margin-top:2.5vh;">Problem only for now — <em>no solutions yet</em>. If ideas arrive early, park them for the next step.</p>
     <div class="timer" data-min="15"><span class="tlabel">Problem discovery</span><span class="digits">15:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
   </section>
 
   <!-- 10 · IDEA GENERATION -->
-  <section class="slide" data-n="10 / 21">
+  <section class="slide" data-n="10 / 22">
     <div class="tag">Idea generation</div>
     <h2>Many ideas first.<br>Then choose <span class="redx">one</span>.</h2>
-    <div class="makes">
-      <span>a place</span><span>a service</span><span>an app</span><span>a campaign</span><span>an event</span><span>a new rule</span><span>a map</span><span>a transport fix</span><span>a public artwork</span><span>a physical object</span><span>a new kind of youth space</span>
+    <div class="checks steps-list">
+      <div><b>Flood.</b> Say every idea that comes — sensible, wild, half-formed. Write them all down. A place, a service, an app, an event, a rule, an artwork — anything.</div>
+      <div><b>Cut.</b> Cross out duplicates, and anything nobody's excited to talk about.</div>
+      <div><b>Test the last few.</b> Is it <b class="smart">smart</b>? Is it <b class="kind">kind</b>? Who is it for? Would people your age actually use it?</div>
+      <div><b>Choose one.</b> The smart + kind answers you just gave will become lines of your pitch.</div>
     </div>
     <div class="timer" data-min="15"><span class="tlabel">Idea generation</span><span class="digits">15:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
   </section>
 
   <!-- 11 · PITCH LESSON -->
-  <section class="slide" data-n="11 / 21">
+  <section class="slide" data-n="11 / 22">
     <div class="tag">Mini pitch lesson — how you'll tell it</div>
     <h2>Your whole pitch,<br>in three lines</h2>
     <div class="pitchlines">
@@ -333,7 +348,7 @@
   </section>
 
   <!-- 12 · BREAK -->
-  <section class="slide" data-n="12 / 21">
+  <section class="slide" data-n="12 / 22">
     <div class="tag">11:00</div>
     <h2>Break</h2>
     <p class="big dim">Back at 11:15 — then we build.</p>
@@ -341,7 +356,7 @@
   </section>
 
   <!-- 13 · WS2 TITLE -->
-  <section class="slide" data-n="13 / 21">
+  <section class="slide" data-n="13 / 22">
     <div class="tag">Workshop 2 · 11:15 – 12:15</div>
     <h2>Build the future<br><span class="redx">proposal</span></h2>
     <p class="big">Make your idea visible. Create at least one of:</p>
@@ -352,7 +367,7 @@
   </section>
 
   <!-- 14 · IDEA CHECKS -->
-  <section class="slide" data-n="14 / 21">
+  <section class="slide" data-n="14 / 22">
     <div class="tag">Keep checking your idea against these</div>
     <h2>The eight<br>idea checks</h2>
     <div class="checks">
@@ -368,15 +383,29 @@
   </section>
 
   <!-- 15 · REMIX -->
-  <section class="slide" data-n="15 / 21">
+  <section class="slide" data-n="15 / 22">
     <div class="tag">~11:45 · The remix moment</div>
     <h2>Steal one idea<br><span class="gold">kindly</span></h2>
-    <p class="big">Send one or two people from your team to visit another table. Find one idea you like, bring it back, and use it to improve your own proposal.</p>
+    <div class="checks steps-list">
+      <div>Send <b>one or two envoys</b> to another table. Everyone else stays home — keep building, and welcome your own visitors.</div>
+      <div><b>Visitors:</b> introduce yourselves. <b>Hosts:</b> tell them your idea in a sentence or two.</div>
+      <div>Visitors ask one follow-up question — <em>"how would that work?"</em> is always a good one.</div>
+      <div>Envoys return and report: bring <b class="gold">one idea</b> home and use it to make your proposal better.</div>
+    </div>
     <div class="timer" data-min="5"><span class="tlabel">Remix</span><span class="digits">05:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
   </section>
 
-  <!-- 16 · LUNCH -->
-  <section class="slide" data-n="16 / 21">
+  <!-- 16 · BUILD CONTINUES -->
+  <section class="slide" data-n="16 / 22">
+    <div class="tag">~11:50 · Back to it</div>
+    <h2>Build it<br><span class="redx">home</span></h2>
+    <p class="big">Fold in what you stole. Finish your visual. Nail down your one clear idea.</p>
+    <p class="big dim">Done early? Start saying your pitch lines out loud at the table.</p>
+    <div class="timer" data-min="25"><span class="tlabel">Remaining build time</span><span class="digits">25:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
+  </section>
+
+  <!-- 17 · LUNCH -->
+  <section class="slide" data-n="17 / 22">
     <div class="tag">12:15 · Lunch</div>
     <h2>Lunch +<br>mini-expo</h2>
     <p class="big">Leave your posters and materials on the tables — wander around and see what every other team is imagining.</p>
@@ -384,8 +413,8 @@
     <div class="timer" data-min="45"><span class="tlabel">Lunch</span><span class="digits">45:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
   </section>
 
-  <!-- 17 · REHEARSAL -->
-  <section class="slide" data-n="17 / 21">
+  <!-- 18 · REHEARSAL -->
+  <section class="slide" data-n="18 / 22">
     <div class="tag">1:00 · Rehearsal + coaching</div>
     <h2>Practise it<br>out loud</h2>
     <div class="pitchlines">
@@ -404,16 +433,16 @@
     <div class="timer" data-min="30"><span class="tlabel">Rehearsal</span><span class="digits">30:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
   </section>
 
-  <!-- 18 · SHOWTIME -->
-  <section class="slide" data-n="18 / 21">
+  <!-- 19 · SHOWTIME -->
+  <section class="slide" data-n="19 / 22">
     <div class="tag">1:30 · Final pitches</div>
     <h2>Over to <span class="redx">you</span></h2>
     <p class="big dim">Two minutes per team. Panel — you're listening for ideas that are practical, ideas that could only come from lived experience, and ideas worth taking further.</p>
     <div class="timer" data-min="2"><span class="tlabel">Pitch timer — reset between teams</span><span class="digits">02:00</span><span class="tbtns"><button data-act="start">Start</button><button data-act="pause">Pause</button><button data-act="reset">Reset</button></span></div>
   </section>
 
-  <!-- 19 · REFLECTION -->
-  <section class="slide" data-n="19 / 21">
+  <!-- 20 · REFLECTION -->
+  <section class="slide" data-n="20 / 22">
     <div class="tag">2:20 · Reflection</div>
     <h2>What did we<br>hear today?</h2>
     <div class="biglist">
@@ -423,8 +452,8 @@
     </div>
   </section>
 
-  <!-- 20 · RECOGNITIONS -->
-  <section class="slide" data-n="20 / 21">
+  <!-- 21 · RECOGNITIONS -->
+  <section class="slide" data-n="21 / 22">
     <div class="tag">Recognitions</div>
     <h2>No single winner<br>today — <span class="gold">on purpose</span></h2>
     <div class="awards">
@@ -439,8 +468,8 @@
     </div>
   </section>
 
-  <!-- 21 · CLOSE -->
-  <section class="slide" data-n="21 / 21">
+  <!-- 22 · CLOSE -->
+  <section class="slide" data-n="22 / 22">
     <div class="tag">Thank you</div>
     <h2>Keep<br><span class="redx">noticing</span></h2>
     <p class="big">Young people deserve a city that doesn't just include them in the future, but listens to them now. Today, it did.</p>
@@ -476,11 +505,22 @@
     current = Math.max(0, Math.min(slides.length-1, i));
     slides[current].scrollIntoView({behavior:'smooth'});
   }
-  document.getElementById('next').addEventListener('click', ()=>go(current+1));
+  // fragments: reveal one per advance before moving to the next slide
+  function nextFrag(){
+    const f = slides[current] && slides[current].querySelector('.frag:not(.on)');
+    if (f) { f.classList.add('on'); return true; }
+    return false;
+  }
+  function advance(){ if (!nextFrag()) go(current+1); }
+  document.getElementById('next').addEventListener('click', advance);
   document.getElementById('prev').addEventListener('click', ()=>go(current-1));
+  deck.addEventListener('click', e=>{
+    if (e.target.closest('button')) return;
+    nextFrag(); // tap anywhere on a slide reveals its next line (touch-friendly)
+  });
   document.addEventListener('keydown', e=>{
     if (e.target.tagName === 'BUTTON') return;
-    if (['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)) { e.preventDefault(); go(current+1); }
+    if (['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)) { e.preventDefault(); advance(); }
     if (['ArrowUp','ArrowLeft','PageUp'].includes(e.key)) { e.preventDefault(); go(current-1); }
     if (e.key === 'l' || e.key === 'L') setTheme(!document.body.classList.contains('light'));
   });
