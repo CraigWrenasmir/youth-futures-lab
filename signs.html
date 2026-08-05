@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Youth Futures Lab — Entrance Signs</title>
+<style>
+  :root{
+    --paper:#FAF5EC; --ink:#1C1712; --soft:#5C5347; --red:#E62B1E;
+    --smart:#0E7C86; --kind:#E0592A;
+    --display:'Avenir Next Condensed','Arial Narrow','Helvetica Neue',Arial,sans-serif;
+    --ui:'Avenir Next','Avenir','Helvetica Neue',Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#888;font-family:var(--ui);}
+  .pg{
+    width:297mm;height:209mm;background:var(--paper);margin:10px auto;
+    padding:16mm 20mm;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;page-break-after:always;position:relative;overflow:hidden;
+  }
+  .logo{height:26mm;margin-bottom:8mm;}
+  h1{
+    font-family:var(--display);font-weight:700;text-transform:uppercase;
+    font-size:78px;line-height:.95;color:var(--ink);
+  }
+  h1 .s{color:var(--smart);} h1 .k{color:var(--kind);} h1 .r{color:var(--red);}
+  .room{
+    font-family:var(--display);font-weight:700;font-size:54px;text-transform:uppercase;
+    color:#fff;background:var(--red);border-radius:16px;padding:6mm 14mm;margin-top:10mm;
+    letter-spacing:.04em;
+  }
+  .arrow{font-size:220px;line-height:1;color:var(--red);margin:4mm 0;font-family:Arial,sans-serif;}
+  .sub{font-family:Georgia,serif;font-style:italic;font-size:24px;color:var(--soft);margin-top:8mm;}
+  .foot{
+    position:absolute;bottom:10mm;left:0;right:0;text-align:center;
+    font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:var(--soft);
+  }
+  @media print{
+    @page{size:A4 landscape;margin:0;}
+    body{background:#fff;}
+    .pg{margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .pg:last-child{page-break-after:auto;}
+  }
+</style>
+</head>
+<body>
+
+<div class="pg">
+  <img class="logo" src="assets/tedxnewy-black.png" alt="TEDxNewy">
+  <h1>Youth Futures Lab</h1>
+  <h1 style="font-size:54px;margin-top:4mm;"><span class="s">Smart</span> <span class="r">+</span> <span class="k">Kind</span> Newcastle</h1>
+  <div class="room">Room X-101 · You're in the right place</div>
+  <div class="sub">Come in — find your table, meet your team, grab a pen.</div>
+  <div class="foot">TEDxNewy Youth Futures Lab · Friday 7 August 2026</div>
+</div>
+
+<div class="pg">
+  <img class="logo" src="assets/tedxnewy-black.png" alt="TEDxNewy">
+  <h1>Youth Futures Lab</h1>
+  <div class="arrow">&rarr;</div>
+  <div class="room">Room X-101</div>
+  <div class="foot">TEDxNewy Youth Futures Lab · Friday 7 August 2026</div>
+</div>
+
+<div class="pg">
+  <img class="logo" src="assets/tedxnewy-black.png" alt="TEDxNewy">
+  <h1>Youth Futures Lab</h1>
+  <div class="arrow">&larr;</div>
+  <div class="room">Room X-101</div>
+  <div class="foot">TEDxNewy Youth Futures Lab · Friday 7 August 2026</div>
+</div>
+
+</body>
+</html>

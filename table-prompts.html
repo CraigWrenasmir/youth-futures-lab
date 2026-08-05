@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Youth Futures Lab — Table Warm-Up Prompts</title>
+<style>
+  :root{
+    --paper:#FAF5EC; --ink:#1C1712; --soft:#5C5347;
+    --red:#E62B1E; --smart:#0E7C86; --kind:#E0592A; --gold:#A67C1E;
+    --display:'Avenir Next Condensed','Arial Narrow','Helvetica Neue',Arial,sans-serif;
+    --ui:'Avenir Next','Avenir','Helvetica Neue',Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#888;font-family:var(--ui);}
+  .pg{
+    width:297mm;height:209mm;background:var(--paper);margin:10px auto;
+    padding:20mm 22mm;display:flex;flex-direction:column;justify-content:center;
+    page-break-after:always;position:relative;overflow:hidden;
+  }
+  .kicker{
+    font-size:14px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;
+    color:var(--red);margin-bottom:10mm;
+  }
+  .q{
+    font-family:var(--display);font-weight:700;text-transform:uppercase;
+    font-size:88px;line-height:.95;color:var(--ink);max-width:250mm;
+  }
+  .q .a1{color:var(--smart);} .q .a2{color:var(--kind);} .q .a3{color:var(--gold);} .q .a4{color:var(--red);}
+  .sub{
+    font-family:Georgia,serif;font-style:italic;font-size:22px;color:var(--soft);margin-top:12mm;
+  }
+  .foot{
+    position:absolute;bottom:12mm;right:22mm;
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--soft);
+  }
+  .num{
+    position:absolute;top:12mm;right:22mm;
+    font-family:var(--display);font-weight:700;font-size:20px;color:var(--soft);
+  }
+  @media print{
+    @page{size:A4 landscape;margin:0;}
+    body{background:#fff;}
+    .pg{margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .pg:last-child{page-break-after:auto;}
+  }
+</style>
+</head>
+<body>
+<script>
+const PROMPTS = [
+  ["Your favourite spot in <span class='a1'>Newy</span>", "Name it, draw it, star someone else's."],
+  ["How do you get <span class='a2'>around</span> town?", "Bus, board, bike, lift, legs — what actually happens?"],
+  ["Best <span class='a3'>cheap feed</span> in Newcastle?", "Under $15. Defend your answer."],
+  ["Where do you and your friends <span class='a4'>actually</span> hang out?", "Not where adults think you go — where you really go."],
+  ["A place here that just feels <span class='a1'>good</span> to be in", "What makes it feel that way?"],
+  ["Something about this city that <span class='a2'>annoys</span> you", "Small or huge. Vent away."],
+  ["Rainy weekend in Newcastle — what do you <span class='a3'>do</span>?", "Honest answers only."],
+  ["$1000 to make Newcastle <span class='a4'>better</span> — spend it", "What would you do with it?"],
+  ["Where would you take a <span class='a1'>visitor</span> first?", "Show off your city."],
+  ["Newcastle in <span class='a2'>one word</span>", "Write yours. Circle ones you agree with."],
+];
+document.body.innerHTML = PROMPTS.map(([q, sub], i) => `
+  <div class="pg">
+    <div class="num">${String(i+1).padStart(2,'0')} / 10</div>
+    <div class="kicker">Warm-Up Wall · While you wait — grab a pen</div>
+    <div class="q">${q}</div>
+    <div class="sub">${sub} <b>Write, draw, vote, disagree — anywhere on this table's big paper.</b></div>
+    <div class="foot">TEDxNewy Youth Futures Lab · Smart + Kind Newcastle</div>
+  </div>`).join('');
+</script>
+</body>
+</html>

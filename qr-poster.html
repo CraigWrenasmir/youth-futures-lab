@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Youth Futures Lab — Submission QR Poster</title>
+<style>
+  :root{
+    --paper:#FAF5EC; --ink:#1C1712; --soft:#5C5347; --red:#E62B1E;
+    --smart:#0E7C86; --kind:#E0592A;
+    --display:'Avenir Next Condensed','Arial Narrow','Helvetica Neue',Arial,sans-serif;
+    --ui:'Avenir Next','Avenir','Helvetica Neue',Arial,sans-serif;
+    --mono:'Menlo','Consolas',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#888;font-family:var(--ui);}
+  .pg{
+    width:210mm;height:296mm;background:var(--paper);margin:10px auto;
+    padding:16mm 18mm;display:flex;flex-direction:column;align-items:center;
+    text-align:center;position:relative;overflow:hidden;
+  }
+  .kicker{font-size:13px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;color:var(--red);margin-bottom:6mm;}
+  h1{
+    font-family:var(--display);font-weight:700;text-transform:uppercase;
+    font-size:64px;line-height:.95;color:var(--ink);margin-bottom:8mm;
+  }
+  h1 span{color:var(--red);}
+  .qr{width:110mm;height:110mm;border:3px solid var(--ink);border-radius:8mm;padding:5mm;background:#fff;}
+  .steps{margin-top:8mm;text-align:left;font-family:Georgia,serif;font-size:19px;color:var(--ink);}
+  .steps div{margin-bottom:4mm;padding-left:11mm;position:relative;}
+  .steps b.n{
+    position:absolute;left:0;top:0;width:8mm;height:8mm;border-radius:50%;
+    background:var(--red);color:#fff;font-family:var(--display);
+    display:inline-flex;align-items:center;justify-content:center;font-size:15px;
+  }
+  .steps div:nth-child(2) b.n{background:var(--smart);}
+  .steps div:nth-child(3) b.n{background:var(--kind);}
+  .link{
+    font-family:var(--mono);font-size:17px;color:var(--ink);
+    border:2px solid var(--soft);border-radius:8px;padding:4mm 8mm;margin-top:6mm;
+  }
+  .foot{
+    position:absolute;bottom:10mm;left:0;right:0;text-align:center;
+    font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:var(--soft);
+  }
+  @media print{
+    @page{size:A4 portrait;margin:0;}
+    body{background:#fff;}
+    .pg{margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="pg">
+  <div class="kicker">Digital submissions · any time before 1:20 pm</div>
+  <h1>Send us<br>your <span>work</span></h1>
+  <img class="qr" src="assets/submit-qr.png" alt="QR code for digital submissions">
+  <div class="steps">
+    <div><b class="n">1</b> Scan the QR code with any phone camera.</div>
+    <div><b class="n">2</b> Made it in Canva? <b>Download as PNG or PDF first.</b></div>
+    <div><b class="n">3</b> <b>Name the file after your team</b>, then upload. Done.</div>
+  </div>
+  <div class="link">dropbox.com/request/ljxawzocz2y0rg5ll46e</div>
+  <div class="foot">TEDxNewy Youth Futures Lab · Smart + Kind Newcastle</div>
+</div>
+</body>
+</html>
