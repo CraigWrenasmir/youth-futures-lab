@@ -86,6 +86,10 @@
     font-family:var(--display);font-weight:700;font-size:15px;text-transform:uppercase;
     letter-spacing:.06em;color:var(--ink);padding-bottom:1.5mm;
   }
+  .cert .datefoot{
+    font-family:var(--display);font-weight:700;font-size:14px;text-transform:uppercase;
+    letter-spacing:.08em;color:var(--ink);margin-top:6mm;
+  }
   @media print{
     body{background:#fff;}
     .toolbar{display:none;}
@@ -127,9 +131,10 @@ document.body.insertAdjacentHTML('beforeend', AWARDS.map(([title, desc]) => `
     <div class="teamlabel">Consultancy team</div>
     <div class="footer">
       <div class="sig"><div class="line"></div><span>Craig</span></div>
-      <div class="date">Friday 7 August 2026</div>
+      <div class="sig"><div class="line"></div><span>Teacher</span></div>
       <div class="sig"><div class="line"></div><span>Maggie</span></div>
     </div>
+    <div class="datefoot">Friday 7 August 2026</div>
   </div>`).join(''));
 </script>
 </body>
