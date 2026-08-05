@@ -197,7 +197,8 @@
   .pitchchecks div:nth-child(6)::before{background:var(--gold);}
 
   /* map slide */
-  .mapimg{max-width:min(100%,1050px);max-height:52vh;border-radius:12px;border:2px solid var(--paper-dim);object-fit:cover;}
+  .mapslide{padding:4.5vh 4vw;justify-content:center;}
+  .mapimg{width:100%;height:74vh;border-radius:12px;border:2px solid var(--paper-dim);object-fit:cover;}
 
   /* hosts */
   .hosts{display:flex;gap:4vw;margin-top:3.5vh;flex-wrap:wrap;}
@@ -373,11 +374,9 @@
   </section>
 
   <!-- 10 · MAP -->
-  <section class="slide" data-n="10 / 30">
-    <div class="tag">Your patch</div>
-    <h2>This is <span class="smart">Newcastle</span></h2>
+  <section class="slide mapslide" data-n="10 / 30">
+    <h2 style="font-size:clamp(24px,3.4vw,46px);margin-bottom:1.4vh;"><span class="gold" style="font-family:var(--ui);font-size:.45em;letter-spacing:.24em;vertical-align:middle;margin-right:1.2vw;">YOUR PATCH</span> This is <span class="smart">Newcastle</span></h2>
     <img class="mapimg" src="assets/newcastle-map.png" alt="Map of Newcastle from the western suburbs to the coast, with NUspace, Newcastle Interchange, Queens Wharf, Newcastle Beach and Nobbys Lighthouse marked">
-    <p class="big dim" style="margin-top:2vh;">You are here — NUspace, beside Civic station. The harbour and Stockton to the north, Nobbys and the beaches to the east, suburbs in every direction. Whether you're from Hamilton or Maitland, <em>your experience of this map is your expertise today.</em></p>
     <p style="font-family:var(--ui);font-size:11px;color:var(--paper-dim);margin-top:1vh;">Map © OpenStreetMap contributors · © CARTO</p>
   </section>
 
