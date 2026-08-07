@@ -207,6 +207,30 @@
   }
   .model b{font-style:normal;}
 
+  /* pitch showcase */
+  .idxgrid{display:flex;flex-wrap:wrap;gap:1.6vh 1.2vw;margin-top:3vh;max-width:1100px;}
+  .idxbtn{
+    font-family:var(--display);text-transform:uppercase;font-size:clamp(19px,2.4vw,30px);
+    background:var(--paper);color:var(--ink);border:none;border-radius:999px;
+    padding:1.2vh 2vw;cursor:pointer;letter-spacing:.02em;
+  }
+  .idxbtn:nth-child(3n+1){background:var(--red);color:#fff;}
+  .idxbtn:nth-child(3n){background:transparent;border:2px solid var(--gold);color:var(--gold);}
+  .idxbtn:hover{transform:scale(1.05);}
+  .pitchslide{padding:3.5vh 3vw;}
+  .pitchhead{display:flex;align-items:baseline;gap:1.5vw;margin-bottom:1.5vh;flex-wrap:wrap;}
+  .pitchhead h2{font-size:clamp(24px,3.6vw,50px);margin-bottom:0;}
+  .backbtn{
+    font-family:var(--ui);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    background:transparent;color:var(--paper-dim);border:1.5px solid var(--paper-dim);
+    border-radius:999px;padding:7px 14px;cursor:pointer;
+  }
+  .backbtn:hover{border-color:var(--red);color:var(--red);}
+  .pm{flex:1;display:flex;gap:1vw;align-items:center;justify-content:center;flex-wrap:wrap;min-height:0;}
+  .pm img{max-height:74vh;max-width:96%;object-fit:contain;border-radius:8px;background:#fff;}
+  .pm.multi img{max-height:70vh;max-width:31%;}
+  .pm.many img{max-height:36vh;max-width:32%;}
+
   /* solution mockups */
   .mockwrap{display:flex;align-items:stretch;gap:3.5vw;margin-top:2.5vh;flex-wrap:wrap;}
   .phone{
@@ -329,7 +353,7 @@
 <div class="deck" id="deck">
 
   <!-- 1 · ARRIVAL HOLDING SLIDE -->
-  <section class="slide" data-n="1 / 35">
+  <section class="slide" data-n="1 / 46">
     <img class="yflogo logo-dark" src="assets/tedxnewy-white.png" alt="TEDxNewy">
     <img class="yflogo logo-light" src="assets/tedxnewy-black.png" alt="TEDxNewy">
     <div class="tag">Youth Futures Lab · Friday 7 August 2026</div>
@@ -340,12 +364,12 @@
   </section>
 
   <!-- 2 · ACKNOWLEDGEMENT OF COUNTRY -->
-  <section class="slide" data-n="2 / 35">
+  <section class="slide" data-n="2 / 46">
     <h2>Acknowledgement<br>of <span class="gold">Country</span></h2>
   </section>
 
   <!-- 3 · WOULD YOU RATHER MINGLE -->
-  <section class="slide" data-n="3 / 35">
+  <section class="slide" data-n="3 / 46">
     <div class="tag">Mingle · a question to walk with</div>
     <h2>Would you<br><span class="redx">rather…</span></h2>
     <p class="big dim">Wander the room. When we say <em>stop</em>, find someone new and talk it through.</p>
@@ -358,7 +382,7 @@
   </section>
 
   <!-- 4 · WELCOME -->
-  <section class="slide" data-n="4 / 35">
+  <section class="slide" data-n="4 / 46">
     <div class="tag">10:00 · Welcome</div>
     <h2>Ideas worth<br><span class="redx">sharing</span></h2>
     <p class="big">This is a TEDx event, and TEDx is built on a simple belief: a good idea, clearly told, can change how people see things.</p>
@@ -366,7 +390,7 @@
   </section>
 
   <!-- 5 · HOSTS -->
-  <section class="slide" data-n="5 / 35">
+  <section class="slide" data-n="5 / 46">
     <div class="tag">Your hosts today</div>
     <h2>Maggie <span class="redx">+</span> Craig</h2>
     <div class="hosts">
@@ -391,7 +415,7 @@
   </section>
 
   <!-- 6 · ENERGISER -->
-  <section class="slide" data-n="6 / 35">
+  <section class="slide" data-n="6 / 46">
     <div class="tag">Warm up · two minutes</div>
     <h2>Stand up <span class="redx">if…</span></h2>
     <p class="big dim">Stand — or raise a hand, make a small gesture, or just notice quietly. Every way of joining in counts.</p>
@@ -406,14 +430,14 @@
   </section>
 
   <!-- 7 · THE BRIEF -->
-  <section class="slide" data-n="7 / 35">
+  <section class="slide" data-n="7 / 46">
     <div class="tag">The challenge brief</div>
     <h2>You are <span class="redx">consultants</span><br>to the council</h2>
     <p class="big">Your job today: choose one part of city life and design a new idea, improvement, service, space, campaign, or invention that would make Newcastle both <b class="smart">smarter</b> and <b class="kind">kinder</b> for young people.</p>
   </section>
 
   <!-- 8 · SMART + KIND -->
-  <section class="slide" data-n="8 / 35">
+  <section class="slide" data-n="8 / 46">
     <div class="tag">The two words that matter</div>
     <h2><span class="smart">Smart</span> is not enough.<br><span class="kind">Kind</span> is not enough.</h2>
     <div class="duo">
@@ -424,7 +448,7 @@
   </section>
 
   <!-- 9 · THE DAY -->
-  <section class="slide" data-n="9 / 35">
+  <section class="slide" data-n="9 / 46">
     <div class="tag">The shape of the day</div>
     <h2>Here's the plan</h2>
     <div class="schedule">
@@ -439,7 +463,7 @@
   </section>
 
   <!-- 10 · HOUSEKEEPING -->
-  <section class="slide" data-n="10 / 35">
+  <section class="slide" data-n="10 / 46">
     <div class="tag">Before we start</div>
     <h2>The important<br><span class="gold">bits</span></h2>
     <div class="biglist">
@@ -451,21 +475,21 @@
   </section>
 
   <!-- 11 · WS1 TITLE -->
-  <section class="slide" data-n="11 / 35">
+  <section class="slide" data-n="11 / 46">
     <div class="tag">Workshop 1 · 10:15 – 11:00</div>
     <h2>See the city<br><span class="redx">differently</span></h2>
     <p class="big">Choose a focus area. Find a real problem. Start shaping an idea.</p>
   </section>
 
   <!-- 12 · MAP -->
-  <section class="slide mapslide" data-n="12 / 35">
+  <section class="slide mapslide" data-n="12 / 46">
     <h2 style="font-size:clamp(24px,3.4vw,46px);margin-bottom:1.4vh;"><span class="gold" style="font-family:var(--ui);font-size:.45em;letter-spacing:.24em;vertical-align:middle;margin-right:1.2vw;">YOUR PATCH</span> This is <span class="smart">Newcastle</span></h2>
     <img class="mapimg" src="assets/newcastle-map.png" alt="Map of Newcastle from the western suburbs to the coast, with NUspace, Newcastle Interchange, Queens Wharf, Newcastle Beach and Nobbys Lighthouse marked">
     <p style="font-family:var(--ui);font-size:11px;color:var(--paper-dim);margin-top:1vh;">Map © OpenStreetMap contributors · © CARTO</p>
   </section>
 
   <!-- 13 · FOCUS AREAS -->
-  <section class="slide" data-n="13 / 35">
+  <section class="slide" data-n="13 / 46">
     <div class="tag">First: choose your focus area</div>
     <h2>Pick what actually<br>affects <span class="gold">you</span></h2>
     <div class="checks steps-list">
@@ -479,7 +503,7 @@
   </section>
 
   <!-- 14 · PROBLEM DISCOVERY -->
-  <section class="slide" data-n="14 / 35">
+  <section class="slide" data-n="14 / 46">
     <div class="tag">Problem discovery</div>
     <h2>What's really<br>going on?</h2>
     <div class="checks steps-list">
@@ -493,7 +517,7 @@
   </section>
 
   <!-- 15 · IDEA GENERATION -->
-  <section class="slide" data-n="15 / 35">
+  <section class="slide" data-n="15 / 46">
     <div class="tag">Idea generation</div>
     <h2>Many ideas first.<br>Flood the <span class="redx">table</span>.</h2>
     <div class="checks steps-list">
@@ -505,7 +529,7 @@
   </section>
 
   <!-- 16 · IDEA NARROWING -->
-  <section class="slide" data-n="16 / 35">
+  <section class="slide" data-n="16 / 46">
     <div class="tag">Idea generation · part two</div>
     <h2>Now choose <span class="redx">one</span></h2>
     <div class="checks steps-list">
@@ -517,7 +541,7 @@
   </section>
 
   <!-- 17 · BREAK -->
-  <section class="slide" data-n="17 / 35">
+  <section class="slide" data-n="17 / 46">
     <div class="tag">11:00</div>
     <h2>Break</h2>
     <p class="big dim">Back at 11:15 — a quick lesson in pitching, then we build.</p>
@@ -525,7 +549,7 @@
   </section>
 
   <!-- 18 · PITCH LESSON A -->
-  <section class="slide" data-n="18 / 35">
+  <section class="slide" data-n="18 / 46">
     <div class="tag">Workshop 2 · 11:15 · Mini pitch lesson</div>
     <h2>Your pitch:<br>three lines + <span class="gold">you</span></h2>
     <div class="pitchlines">
@@ -540,7 +564,7 @@
   </section>
 
   <!-- 19 · MODEL PITCH -->
-  <section class="slide" data-n="19 / 35">
+  <section class="slide" data-n="19 / 46">
     <div class="tag">Mini pitch lesson · hear a whole one first</div>
     <h2>One pitch,<br>out <span class="redx">loud</span></h2>
     <div class="pitchlines" style="margin-top:2.5vh;max-width:1000px;">
@@ -555,7 +579,7 @@
   </section>
 
   <!-- 20 · SOLUTION MOCKUPS -->
-  <section class="slide" data-n="20 / 35">
+  <section class="slide" data-n="20 / 46">
     <div class="tag">Mini pitch lesson · make it real</div>
     <h2>What that idea<br>could <span class="gold">look like</span></h2>
     <div class="mockwrap">
@@ -584,7 +608,7 @@
   </section>
 
   <!-- 21 · PITCH LESSON B -->
-  <section class="slide" data-n="21 / 35">
+  <section class="slide" data-n="21 / 46">
     <div class="tag">Mini pitch lesson · open strong, close strong</div>
     <h2>First line, last line —<br>make them <span class="redx">count</span></h2>
     <div class="duo">
@@ -595,7 +619,7 @@
   </section>
 
   <!-- 22 · PITCH LESSON C -->
-  <section class="slide" data-n="22 / 35">
+  <section class="slide" data-n="22 / 46">
     <div class="tag">Mini pitch lesson · your body is part of the pitch</div>
     <h2>Say it like you<br><span class="redx">mean it</span></h2>
     <div class="biglist">
@@ -609,7 +633,7 @@
   </section>
 
   <!-- 23 · BUILD -->
-  <section class="slide" data-n="23 / 35">
+  <section class="slide" data-n="23 / 46">
     <div class="tag">≈11:35 · Build</div>
     <h2>Build the future<br><span class="redx">proposal</span></h2>
     <p class="big">Make your idea visible — as many pieces as you like. <em>The worksheet is your floor, not your ceiling.</em></p>
@@ -621,7 +645,7 @@
   </section>
 
   <!-- 24 · IDEA CHECKS -->
-  <section class="slide" data-n="24 / 35">
+  <section class="slide" data-n="24 / 46">
     <div class="tag">Keep checking your idea against these</div>
     <h2>The six checks<br>= your <span class="redx">pitch</span></h2>
     <div class="checks pitchchecks">
@@ -636,7 +660,7 @@
   </section>
 
   <!-- 25 · REMIX -->
-  <section class="slide" data-n="25 / 35">
+  <section class="slide" data-n="25 / 46">
     <div class="tag">~11:50 · The remix moment</div>
     <h2>Steal one idea<br><span class="gold">kindly</span></h2>
     <div class="checks steps-list">
@@ -649,7 +673,7 @@
   </section>
 
   <!-- 26 · BUILD CONTINUES -->
-  <section class="slide" data-n="26 / 35">
+  <section class="slide" data-n="26 / 46">
     <div class="tag">~11:55 · Back to it</div>
     <h2>Build it<br><span class="redx">home</span></h2>
     <p class="big">Fold in what you stole. Finish your visual. Nail down your one clear idea.</p>
@@ -658,7 +682,7 @@
   </section>
 
   <!-- 27 · LUNCH -->
-  <section class="slide" data-n="27 / 35">
+  <section class="slide" data-n="27 / 46">
     <div class="tag">12:15 · Lunch</div>
     <h2>Lunch +<br>mini-expo</h2>
     <p class="big">Leave your posters and materials on the tables — wander around and see what every other team is imagining.</p>
@@ -667,7 +691,7 @@
   </section>
 
   <!-- 28 · REHEARSAL -->
-  <section class="slide" data-n="28 / 35">
+  <section class="slide" data-n="28 / 46">
     <div class="tag">1:00 · Rehearsal + coaching</div>
     <h2>Practise it<br>out loud</h2>
     <div class="pitchlines">
@@ -687,7 +711,7 @@
   </section>
 
   <!-- 29 · SUBMIT WORK -->
-  <section class="slide" data-n="29 / 35">
+  <section class="slide" data-n="29 / 46">
     <div class="tag">≈1:20 · Digital submissions</div>
     <h2>Send us your<br><span class="redx">work</span></h2>
     <div class="submitwrap">
@@ -705,7 +729,7 @@
   </section>
 
   <!-- 30 · PITCH ORDER WHEEL -->
-  <section class="slide" data-n="30 / 35">
+  <section class="slide" data-n="30 / 46">
     <div class="tag">1:30 · Pitch order</div>
     <h2>Who's <span class="redx">next</span>?</h2>
     <div class="wheelwrap">
@@ -724,8 +748,76 @@
     </div>
   </section>
 
+  <!-- 31 · PITCH MEDIA INDEX -->
+  <section class="slide" id="pitch-index" data-n="31 / 46">
+    <div class="tag">Pitch media · tap a team</div>
+    <h2>Your ideas,<br>on <span class="redx">screen</span></h2>
+    <div class="idxgrid">
+      <button class="idxbtn" onclick="document.getElementById('pt-btac').scrollIntoView()">BTAC</button>
+      <button class="idxbtn" onclick="document.getElementById('pt-chs').scrollIntoView()">CHS</button>
+      <button class="idxbtn" onclick="document.getElementById('pt-freshtap').scrollIntoView()">FreshTap</button>
+      <button class="idxbtn" onclick="document.getElementById('pt-gremlins').scrollIntoView()">Grossmann Gremlins</button>
+      <button class="idxbtn" onclick="document.getElementById('pt-hunter').scrollIntoView()">Hunter Education Initiative</button>
+      <button class="idxbtn" onclick="document.getElementById('pt-big3').scrollIntoView()">The Big 3</button>
+      <button class="idxbtn" onclick="document.getElementById('pt-connection').scrollIntoView()">The Connection Co.</button>
+      <button class="idxbtn" onclick="document.getElementById('pt-rutherford').scrollIntoView()">Rutherford</button>
+      <button class="idxbtn" onclick="document.getElementById('pt-teddies').scrollIntoView()">Tiny Teddies</button>
+      <button class="idxbtn" onclick="document.getElementById('pt-dreamteam').scrollIntoView()">Hang Out — The Dream Team</button>
+    </div>
+  </section>
+
+  <section class="slide pitchslide" id="pt-btac" data-n="32 / 46">
+    <div class="pitchhead"><h2>BTAC</h2><button class="backbtn" onclick="document.getElementById('pitch-index').scrollIntoView()">↩ All teams</button></div>
+    <div class="pm"><img src="assets/pitches/btac.jpg" alt="BTAC pitch media"></div>
+  </section>
+
+  <section class="slide pitchslide" id="pt-chs" data-n="33 / 46">
+    <div class="pitchhead"><h2>CHS</h2><button class="backbtn" onclick="document.getElementById('pitch-index').scrollIntoView()">↩ All teams</button></div>
+    <div class="pm multi"><img src="assets/pitches/chs-1.png" alt="CHS pitch media 1"><img src="assets/pitches/chs-2.png" alt="CHS pitch media 2"><img src="assets/pitches/chs-3.png" alt="CHS pitch media 3"></div>
+  </section>
+
+  <section class="slide pitchslide" id="pt-freshtap" data-n="34 / 46">
+    <div class="pitchhead"><h2>FreshTap</h2><button class="backbtn" onclick="document.getElementById('pitch-index').scrollIntoView()">↩ All teams</button></div>
+    <div class="pm"><img src="assets/pitches/freshtap.jpg" alt="FreshTap pitch media"></div>
+  </section>
+
+  <section class="slide pitchslide" id="pt-gremlins" data-n="35 / 46">
+    <div class="pitchhead"><h2>Grossmann Gremlins</h2><button class="backbtn" onclick="document.getElementById('pitch-index').scrollIntoView()">↩ All teams</button></div>
+    <div class="pm multi"><img src="assets/pitches/gremlins.png" alt="Grossmann Gremlins poster"><img src="assets/pitches/gremlins-2.jpg" alt="Grossmann Gremlins photo"></div>
+  </section>
+
+  <section class="slide pitchslide" id="pt-hunter" data-n="36 / 46">
+    <div class="pitchhead"><h2>Hunter Education Initiative</h2><button class="backbtn" onclick="document.getElementById('pitch-index').scrollIntoView()">↩ All teams</button></div>
+    <div class="pm"><img src="assets/pitches/hunter-ed.jpg" alt="Hunter Education Initiative pitch media"></div>
+  </section>
+
+  <section class="slide pitchslide" id="pt-big3" data-n="37 / 46">
+    <div class="pitchhead"><h2>The Big 3</h2><button class="backbtn" onclick="document.getElementById('pitch-index').scrollIntoView()">↩ All teams</button></div>
+    <div class="pm"><img src="assets/pitches/big3.png" alt="The Big 3 pitch media"></div>
+  </section>
+
+  <section class="slide pitchslide" id="pt-connection" data-n="38 / 46">
+    <div class="pitchhead"><h2>The Connection Co.</h2><button class="backbtn" onclick="document.getElementById('pitch-index').scrollIntoView()">↩ All teams</button></div>
+    <div class="pm multi"><img src="assets/pitches/connection-1.png" alt="The Connection Co. page 1"><img src="assets/pitches/connection-2.png" alt="The Connection Co. page 2"><img src="assets/pitches/connection-3.png" alt="The Connection Co. page 3"></div>
+  </section>
+
+  <section class="slide pitchslide" id="pt-rutherford" data-n="39 / 46">
+    <div class="pitchhead"><h2>Rutherford</h2><button class="backbtn" onclick="document.getElementById('pitch-index').scrollIntoView()">↩ All teams</button></div>
+    <div class="pm"><img src="assets/pitches/rutherford.jpg" alt="Rutherford pitch media"></div>
+  </section>
+
+  <section class="slide pitchslide" id="pt-teddies" data-n="40 / 46">
+    <div class="pitchhead"><h2>Tiny Teddies</h2><button class="backbtn" onclick="document.getElementById('pitch-index').scrollIntoView()">↩ All teams</button></div>
+    <div class="pm"><img src="assets/pitches/tinyteddies-1.png" alt="Tiny Teddies pitch media"></div>
+  </section>
+
+  <section class="slide pitchslide" id="pt-dreamteam" data-n="41 / 46">
+    <div class="pitchhead"><h2>Hang Out — The Dream Team</h2><button class="backbtn" onclick="document.getElementById('pitch-index').scrollIntoView()">↩ All teams</button></div>
+    <div class="pm many"><img src="assets/pitches/dreamteam-1.png" alt="Dream Team slide 1"><img src="assets/pitches/dreamteam-2.png" alt="Dream Team slide 2"><img src="assets/pitches/dreamteam-3.png" alt="Dream Team slide 3"><img src="assets/pitches/dreamteam-4.png" alt="Dream Team slide 4"><img src="assets/pitches/dreamteam-5.png" alt="Dream Team slide 5"></div>
+  </section>
+
   <!-- 31 · SHOWTIME -->
-  <section class="slide" data-n="31 / 35">
+  <section class="slide" data-n="42 / 46">
     <div class="tag">1:30 · Final pitches</div>
     <h2>Over to <span class="redx">you</span></h2>
     <p class="big dim">Two minutes per team. Panel — you're listening for ideas that are practical, ideas that could only come from lived experience, and ideas worth taking further.</p>
@@ -733,7 +825,7 @@
   </section>
 
   <!-- 32 · REFLECTION -->
-  <section class="slide" data-n="32 / 35">
+  <section class="slide" data-n="43 / 46">
     <div class="tag">2:20 · Reflection</div>
     <h2>What did we<br>hear today?</h2>
     <div class="biglist">
@@ -744,7 +836,7 @@
   </section>
 
   <!-- 33 · RECOGNITIONS -->
-  <section class="slide" data-n="33 / 35">
+  <section class="slide" data-n="44 / 46">
     <div class="tag">Recognitions</div>
     <h2>No single winner<br>today — <span class="gold">on purpose</span></h2>
     <div class="awards">
@@ -760,7 +852,7 @@
   </section>
 
   <!-- 34 · STUDENT SPEAKER COMP -->
-  <section class="slide" data-n="34 / 35">
+  <section class="slide" data-n="45 / 46">
     <div class="tag">One more thing · TEDxNewy Student Speaker Competition</div>
     <h2>Got an idea worth<br><span class="redx">sharing</span>?</h2>
     <p class="big">You just built and delivered a pitch. The <b class="gold">TEDxNewy Student Speaker Competition</b> wants your next one — any idea you believe Newcastle should hear. The winner presents it live at <b>TEDxNewy 2026</b> this October.</p>
@@ -779,7 +871,7 @@
   </section>
 
   <!-- 35 · CLOSE -->
-  <section class="slide" data-n="35 / 35">
+  <section class="slide" data-n="46 / 46">
     <div class="tag">Thank you</div>
     <h2>Keep<br><span class="redx">noticing</span></h2>
     <p class="big">Young people deserve a city that doesn't just include them in the future, but listens to them now. Today, it did.</p>
